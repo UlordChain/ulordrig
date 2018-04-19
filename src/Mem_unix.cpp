@@ -34,7 +34,7 @@
 #endif
 
 
-#include "cryptoHello.h"
+#include "crypto/cryptoHello.h"
 #include "log/Log.h"
 #include "Mem.h"
 #include "Options.h"

@@ -4,16 +4,13 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "net/Job.h"
+
 
 #define WORK_MEMORY_SIZE (1024*1024)
 
 //uint8_t *MMem = (uint8_t *)malloc(WORK_MEMORY_SIZE*sizeof(uint8_t));
-/*
-struct cryptohello_ctx {
-	uint8_t *memory;
-};
-*/
-class Job;
+// class Job;
 
 class cryptoHello
 {

@@ -26,7 +26,7 @@
 #include <memory.h>
 
 
-#include "cryptoHello.h"
+#include "crypto/cryptoHello.h"
 #include "Mem.h"
 #include "Options.h"
 #include "xmrig.h"

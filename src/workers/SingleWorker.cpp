@@ -29,7 +29,7 @@
 #include "workers/SingleWorker.h"
 #include "workers/Workers.h"
 #include "net/Job.h"
-#include "cryptoHello.h"
+#include "crypto/cryptoHello.h"
 
 SingleWorker::SingleWorker(Handle *handle)
     : Worker(handle)

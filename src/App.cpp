@@ -39,7 +39,7 @@
 #include "Summary.h"
 #include "version.h"
 #include "workers/Workers.h"
-#include "cryptoHello.h"
+#include "crypto/cryptoHello.h"
 
 #ifdef HAVE_SYSLOG_H
 #   include "log/SysLog.h"

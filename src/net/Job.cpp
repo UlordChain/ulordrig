@@ -29,7 +29,7 @@
 #include <stdlib.h>
 
 #include "net/Job.h"
-#include "cryptoHello.h"
+#include "crypto/cryptoHello.h"
 
 static inline unsigned char hf_hex2bin(char c, bool &err)
 {
