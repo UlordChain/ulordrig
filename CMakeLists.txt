@@ -9,6 +9,10 @@ option(BUILD_STATIC  "Build static binary" OFF)
 include (CheckIncludeFile)
 include (cmake/cpu.cmake)
 
+# set(CMAKE_FIND_ROOT_PATH "c:/msys64/mingw64/bin")
+#set(CMAKE_C_COMPILER "c:/msys64/mingw64/bin/gcc.exe")
+#set(CMAKE_CXX_COMPILER "c:/msys64/mingw64/bin/g++.exe")
+
 set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -Wall -ggdb -fopenmp")
 
@@ -176,6 +180,7 @@ else()
 endif()
 
 include_directories(src)
+include_directories(src/crypto)
 include_directories(src/3rdparty)
 include_directories(${UV_INCLUDE_DIR})
 

@@ -49,7 +49,7 @@
 
 extern "C"
 {
-#include "crypto/sha3_256.h"
+#include "crypto/c_sha3_256.h"
 }
 
 
@@ -158,7 +158,7 @@ void ApiState::genId()
 
    //         keccak(input, static_cast<int>(inSize), hash, sizeof(hash));
    //         Job::toHex(hash, 8, m_id);
-			sha3_256(input, static_cast<uint32_t>(inSize), hash);
+			crypto_sha3_256(input, static_cast<uint32_t>(inSize), hash);
 			Job::toHex(hash, 8, m_id);
 
             delete [] input;

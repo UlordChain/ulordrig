@@ -22,10 +22,153 @@
  */
 
 #include "App.h"
+#include <pthread.h>
+#include <iostream>
+#include "api/ApiState.h"
+#include "workers/Hashrate.h"
+#include "workers/Workers.h"
+#include "api/NetworkState.h"
+#include "net/Network.h"
+
+
+#define MINGW32
+
+ 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+ 
+#ifdef MINGW32
+#include <winsock2.h>
+#else
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#endif
+ 
+#define LISTENQ 10
+ 
+void *  StartServer(void*) 
+{
+  int serverfd,connectfd;
+  struct sockaddr_in serveraddr;
+ 
+
+  int iRet;
+ 
+  #ifdef MINGW32
+  //initial socket on windows
+  WSADATA wsadata;
+  if(WSAStartup(MAKEWORD(1,1),&wsadata)==SOCKET_ERROR)
+  {
+    printf("WSAStartup() fail\n");
+    exit(0);
+  }
+  #endif
+ 
+  printf("socket()\n");
+  serverfd=socket(AF_INET,SOCK_STREAM,0);
+  if(serverfd==-1)
+  {
+    printf("socket() fail\n");
+    exit(0);
+  }
+ 
+  memset(&serveraddr,0,sizeof(serveraddr));
+ 
+  serveraddr.sin_family=AF_INET;
+  serveraddr.sin_addr.s_addr= inet_addr("127.0.0.1");
+  serveraddr.sin_port=htons(8087);
+ 
+  printf("bind()\n");
+  iRet=bind(serverfd,(struct sockaddr*)&serveraddr,sizeof(serveraddr));
+  if(iRet==-1)
+  {
+    printf("bind() fail\n");
+    exit(0);
+  }
+ 
+  printf("listen()\n");
+  iRet=listen(serverfd,LISTENQ);
+  if(iRet==-1)
+  {
+    printf("listen() fail\n");
+    exit(0);
+  }
+ 
+
+  for(;;)
+  {
+   
+    connectfd=accept(serverfd,(struct sockaddr*)NULL,NULL);
+    
+ 
+    #ifdef MINGW32
+    
+    //send(connectfd,buff,strlen(buff),0);
+    
+    char recvBuf[20]; 
+    recv(connectfd, recvBuf, 20, 0);
+    //printf(recvBuf);
+
+    if (recvBuf[0] !='\0')
+     {
+       
+   
+            
+              
+           double  hashrate_d=Workers::ret_Hashrate();
+            char str[7];
+            _gcvt_s(str, sizeof(str), hashrate_d, 5);
+            char str_h[30]="Hashrate/  ";
+            strcat(str_h,str);
+             int accepted= App::m_selfother->ret_acc();
+             int reject = App::m_selfother->ret_rej();
+             int sum =reject+accepted;
+
+            char str_1[25],str_2[25];
+              sprintf(str_1,"accept/ %d ", accepted );                  
+              sprintf(str_2,"total/ %d",sum);
+           char str_new[150];
+           strcat(str_new,str_h);strcat(str_new,str_1);strcat(str_new,str_2);
+           int sen=send(connectfd,str_new,strlen(str_new),0); 
+           recvBuf[0]='\0';
+           str_new[0]='\0';
+           memset( str_new, '\0', sizeof(str_new) );
+
+           //printf(str_new);
+           if(sen == SOCKET_ERROR){
+              printf("fault\n");
+           }
+            
+           closesocket(connectfd);
+           close(connectfd);
+       }     
+   
+  }  
+    #else
+    //write(connectfd,buff,strlen(buff));
+    
+    #endif
+ 
+ 
+  #ifdef MINGW32
+  
+  //closesocket(serverfd);
+  WSACleanup();
+  #endif
+ 
+  exit(0);
+} 
+
+
 
 
 int main(int argc, char **argv) {
     App app(argc, argv);
 
+
+    pthread_t pstartServer;
+    pthread_create(&pstartServer,NULL,StartServer,NULL);
+    pthread_detach(pstartServer);	
     return app.exec();
 }

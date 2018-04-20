@@ -66,6 +66,10 @@ void Workers::printHashrate(bool detail)
     m_hashrate->print();
 }
 
+double Workers::ret_Hashrate()
+{
+   return  m_hashrate->calc(2500);
+}
 
 void Workers::setEnabled(bool enabled)
 {

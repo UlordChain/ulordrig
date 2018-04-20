@@ -51,7 +51,7 @@
 
 
 App *App::m_self = nullptr;
-
+App * App::m_selfother = nullptr;
 
 
 App::App(int argc, char **argv) :
@@ -61,7 +61,7 @@ App::App(int argc, char **argv) :
     m_options(nullptr)
 {
     m_self = this;
-
+    m_selfother = this; 
     Cpu::init();
     m_options = Options::parse(argc, argv);
     if (!m_options) {
@@ -95,6 +95,14 @@ App::App(int argc, char **argv) :
     uv_signal_init(uv_default_loop(), &m_sigTERM);
 }
 
+int App::ret_acc()
+{
+   return m_network->ret_accpeted();   
+}  
+int App::ret_rej()
+{
+   return m_network->ret_rejected();   
+}  
 
 App::~App()
 {

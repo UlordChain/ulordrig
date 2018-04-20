@@ -139,8 +139,14 @@ void Network::onPause(IStrategy *strategy)
         return Workers::pause();
     }
 }
-
-
+int Network::ret_accpeted(){
+ //m_state.add(result, error);
+ return  m_state.accepted;
+}
+int Network::ret_rejected(){
+ //m_state.add(result, error);
+ return  m_state.rejected;
+}
 void Network::onResultAccepted(IStrategy *strategy, Client *client, const SubmitResult &result, const char *error)
 {
     m_state.add(result, error);

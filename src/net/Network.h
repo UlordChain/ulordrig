@@ -47,7 +47,8 @@ public:
 
   void connect();
   void stop();
-
+  int ret_accpeted();
+  int ret_rejected();
 protected:
   void onActive(IStrategy *strategy, Client *client) override;
   void onJob(IStrategy *strategy, Client *client, const Job &job) override;

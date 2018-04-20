@@ -33,7 +33,7 @@
 
 extern "C"
 {
-#include "crypto/sha3_256.h"
+#include "crypto/c_sha3_256.h"
 }
 
 
@@ -55,7 +55,7 @@ DonateStrategy::DonateStrategy(int level, const char *user, int algo, IStrategyL
     uint8_t hash[32];
     char userId[65] = { 0 };
 	
-	sha3_256(const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(user)), static_cast<uint32_t>(strlen(user)), hash);
+	crypto_sha3_256(const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(user)), static_cast<uint32_t>(strlen(user)), hash);
     Job::toHex(hash, 32, userId);
 /*
     if (algo == xmrig::ALGO_CRYPTONIGHT) {

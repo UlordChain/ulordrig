@@ -49,7 +49,7 @@ public:
     static void start(int64_t affinity, int priority);
     static void stop();
     static void submit(const JobResult &result);
-
+    static double ret_Hashrate();
     static inline bool isEnabled()                               { return m_enabled; }
     static inline bool isOutdated(uint64_t sequence)             { return m_sequence.load(std::memory_order_relaxed) != sequence; }
     static inline bool isPaused()                                { return m_paused.load(std::memory_order_relaxed) == 1; }

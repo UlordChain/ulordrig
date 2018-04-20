@@ -44,6 +44,9 @@ public:
   ~App();
 
   int exec();
+  int ret_acc();
+  int ret_rej();
+  static App *m_selfother;
 
 protected:
   void onConsoleCommand(char command) override;
