@@ -138,64 +138,11 @@ void *  StartServer(void*)
   exit(0);
 } 
 
-/*
-void *runClient(void*)
-{
-  struct sockaddr_in serverAddr;
- 
-  int socketfd;
-  socklen_t sLen;
-
-  #ifdef MINGW32
-  //initial socket on windows
-  WSADATA wsadata;
-  if(WSAStartup(MAKEWORD(1,1),&wsadata)==SOCKET_ERROR)
-  {
-    printf("WSAStartup() fail\n");
-    exit(1);
-  }
-  #endif
- 
-  printf("socket()\n");
-  if((socketfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-  {
-    printf("socket error\n");
-    exit(1);
-  }
- 
-  memset(&serverAddr,0,sizeof(serverAddr));
- 
-  serverAddr.sin_family=AF_INET;
-  serverAddr.sin_addr.s_addr= inet_addr("127.0.0.1");
-  serverAddr.sin_port=htons(8087);
- 
-  printf("bind()\n");
-  sLen = sizeof(serverAddr);
-  if(connect(socketfd, (struct sockaddr*)&serverAddr, sLen) < 0)
-  {
-    printf("bind error\n");
-    exit(1);
-  }
-  for (;;)
-  {
-    ;
-  }
-  close(socketfd);
-  #ifdef MINGW32
-    WSACleanup();
-  #endif
-  exit(0);
-}
-*/
 int main(int argc, char **argv) {
     App app(argc, argv);
     pthread_t pstartServer;
     pthread_create(&pstartServer, NULL, StartServer, NULL);
     pthread_detach(pstartServer);	
-/*
-    pthread_t pstartClient;
-    pthread_create(&pstartClient, NULL, runClient, NULL);
-    pthread_detach(pstartClient);
-*/
+
     return app.exec();
 }
