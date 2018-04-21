@@ -1,4 +1,4 @@
-/* XMRig
+/* UlordRig
  * Copyright 2010      Jeff Garzik <jgarzik@pobox.com>
  * Copyright 2012-2014 pooler      <pooler@litecoinpool.org>
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
@@ -7,6 +7,7 @@
  * Copyright 2017-2018 XMR-Stak    <https://github.com/fireice-uk>, <https://github.com/psychocrypt>
  * Copyright 2018      Lee Clagett <https://github.com/vtnerd>
  * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
+ * Copyright 2018      UlordRig    <https://github.com/UlordChain/ulordrig>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -30,6 +31,7 @@
 #include "workers/Workers.h"
 #include "net/Job.h"
 #include "crypto/cryptoHello.h"
+#include "xmrig.h"
 
 SingleWorker::SingleWorker(Handle *handle)
     : Worker(handle)
@@ -61,7 +63,7 @@ void SingleWorker::start()
 
             m_count++;
             *m_job.nonce() = ++m_result.nonce;
-		
+        
            if (cryptoHello::hash(m_job, m_result.result, m_memory)) {
                 Workers::submit(m_result);
            }

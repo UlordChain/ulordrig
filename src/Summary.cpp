@@ -1,10 +1,11 @@
-/* XMRig
+/* UlordRig
  * Copyright 2010      Jeff Garzik <jgarzik@pobox.com>
  * Copyright 2012-2014 pooler      <pooler@litecoinpool.org>
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
  * Copyright 2014-2016 Wolf9466    <https://github.com/OhGodAPet>
  * Copyright 2016      Jay D Dee   <jayddee246@gmail.com>
  * Copyright 2016-2017 XMRig       <support@xmrig.com>
+ * Copyright 2018      UlordRig    <https://github.com/UlordChain/ulordrig>
  *
  *
  *   This program is free software: you can redistribute it and/or modify
@@ -51,7 +52,7 @@ static void print_versions()
 #   endif
 
 
-    Log::i()->text(Options::i()->colors() ? "\x1B[01;32m * \x1B[01;37mVERSIONS:     \x1B[01;36mXMRig/%s\x1B[01;37m libuv/%s%s" : " * VERSIONS:     XMRig/%s libuv/%s%s",
+    Log::i()->text(Options::i()->colors() ? "\x1B[01;32m * \x1B[01;37mVERSIONS:     \x1B[01;36mulordrig/%s\x1B[01;37m libuv/%s%s" : " * VERSIONS:     ulordrig/%s libuv/%s%s",
                    APP_VERSION, uv_version_string(), buf);
 }
 

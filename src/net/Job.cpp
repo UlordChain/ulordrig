@@ -1,4 +1,4 @@
-/* XMRig
+/* UlordRig
  * Copyright 2010      Jeff Garzik <jgarzik@pobox.com>
  * Copyright 2012-2014 pooler      <pooler@litecoinpool.org>
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
@@ -7,6 +7,7 @@
  * Copyright 2017-2018 XMR-Stak    <https://github.com/fireice-uk>, <https://github.com/psychocrypt>
  * Copyright 2018      Lee Clagett <https://github.com/vtnerd>
  * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
+ * Copyright 2018      UlordRig    <https://github.com/UlordChain/ulordrig>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,9 +25,6 @@
 
 
 #include <string.h>
-
-#include <stdio.h>
-#include <stdlib.h>
 
 #include "net/Job.h"
 #include "crypto/cryptoHello.h"
@@ -109,31 +107,7 @@ bool Job::setBlob(const char *blob)
     if (!fromHex(blob, (int) m_size * 2, m_blob)) {
         return false;
     }
-
-	// hashcat[0] = m_blob[0];
-	// cryptoHello::hash(&hashcat[0]);	
-
 	
-	// uint8_t hashcat0[8] = {'\0','a','s','h','c','a','t', '\0'};
-	// cryptoHello::hash(hashcat0);
-	
-	
-	// cryptoHello::hash(m_blob, (uint32_t)m_size);
-
-/*
-	const char *messStr = "hashcat";
-	uint32_t messStrLen = (uint32_t)strlen(messStr);
-	uint8_t in[32], out[32];
-	memset(in, 0, 32*sizeof(uint8_t));
-	memcpy(in, messStr, messStrLen*sizeof(char));
-	uint8_t *MMem = (uint8_t *)malloc((1024*1024)*sizeof(uint8_t));
-	memset(MMem, 0, (1024*1024)*sizeof(uint8_t));
-	powFunction(in, MMem, out);
-	free(MMem);
-	for (uint32_t i = 0; i < 32; ++i)
-		printf("%.2x", out[i]);
-	printf("\n");
-*/
     if (*nonce() != 0 && !m_nicehash) {
         m_nicehash = true;
     }

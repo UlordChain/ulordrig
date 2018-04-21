@@ -1,4 +1,4 @@
-/* XMRig
+/* UlordRig
  * Copyright 2010      Jeff Garzik <jgarzik@pobox.com>
  * Copyright 2012-2014 pooler      <pooler@litecoinpool.org>
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
@@ -6,6 +6,7 @@
  * Copyright 2016      Jay D Dee   <jayddee246@gmail.com>
  * Copyright 2017-2018 XMR-Stak    <https://github.com/fireice-uk>, <https://github.com/psychocrypt>
  * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
+ * Copyright 2018      UlordRig    <https://github.com/UlordChain/ulordrig>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -57,16 +58,6 @@ DonateStrategy::DonateStrategy(int level, const char *user, int algo, IStrategyL
 	
 	crypto_sha3_256(const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(user)), static_cast<uint32_t>(strlen(user)), hash);
     Job::toHex(hash, 32, userId);
-/*
-    if (algo == xmrig::ALGO_CRYPTONIGHT) {
-        m_pools.push_back(new Url(kDonatePool, 7200, userId, nullptr, false, true));
-        m_pools.push_back(new Url(kDonatePool, 80,   userId, nullptr, false, true));
-    }
-    else {
-        m_pools.push_back(new Url(kDonatePool, 5555, userId, nullptr, false, true));
-        m_pools.push_back(new Url(kDonatePool, 7777, userId, nullptr, false, true));
-    }
-*/
     m_pools.push_back(new Url(kDonatePool, 7200, userId, nullptr, false, true));
 
     m_strategy = new FailoverStrategy(m_pools, 1, 1, this, true);

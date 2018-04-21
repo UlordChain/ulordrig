@@ -9,8 +9,6 @@
 
 #define WORK_MEMORY_SIZE (1024*1024)
 
-//uint8_t *MMem = (uint8_t *)malloc(WORK_MEMORY_SIZE*sizeof(uint8_t));
-// class Job;
 
 class cryptoHello
 {

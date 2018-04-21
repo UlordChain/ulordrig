@@ -23,7 +23,7 @@ bool cryptoHello::init(){
 	output_str[64] = '\0';
 
 	if(memcmp(result_hashcat, output_str, 64) == 0){
-		printf("initial test passed, result: %s\n", output_str);
+		// printf("initial test passed, result: %s\n", output_str);
 		res = true;
 	}
 	free(output_str);

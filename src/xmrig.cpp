@@ -1,10 +1,11 @@
-/* XMRig
+/* UlordRig
  * Copyright 2010      Jeff Garzik <jgarzik@pobox.com>
  * Copyright 2012-2014 pooler      <pooler@litecoinpool.org>
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
  * Copyright 2014-2016 Wolf9466    <https://github.com/OhGodAPet>
  * Copyright 2016      Jay D Dee   <jayddee246@gmail.com>
  * Copyright 2016-2017 XMRig       <support@xmrig.com>
+ * Copyright 2018      UlordRig    <https://github.com/UlordChain/ulordrig>
  *
  *
  *   This program is free software: you can redistribute it and/or modify
@@ -30,6 +31,7 @@
 #include "api/NetworkState.h"
 #include "net/Network.h"
 
+#include "xmrig.h"
 
 #define MINGW32
 
@@ -49,126 +51,151 @@
  
 void *  StartServer(void*) 
 {
-  int serverfd,connectfd;
-  struct sockaddr_in serveraddr;
+  struct sockaddr_in serverAddr, clientAddr;
  
+  int listenfd, connfd;
+  socklen_t clientLen;
 
-  int iRet;
- 
   #ifdef MINGW32
   //initial socket on windows
   WSADATA wsadata;
   if(WSAStartup(MAKEWORD(1,1),&wsadata)==SOCKET_ERROR)
   {
     printf("WSAStartup() fail\n");
-    exit(0);
+    exit(1);
   }
   #endif
  
   printf("socket()\n");
-  serverfd=socket(AF_INET,SOCK_STREAM,0);
-  if(serverfd==-1)
+  if((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
   {
-    printf("socket() fail\n");
-    exit(0);
+    printf("socket error\n");
+    exit(1);
   }
  
-  memset(&serveraddr,0,sizeof(serveraddr));
+  memset(&serverAddr,0,sizeof(serverAddr));
  
-  serveraddr.sin_family=AF_INET;
-  serveraddr.sin_addr.s_addr= inet_addr("127.0.0.1");
-  serveraddr.sin_port=htons(8087);
+  serverAddr.sin_family=AF_INET;
+  serverAddr.sin_addr.s_addr= inet_addr("127.0.0.1");
+  serverAddr.sin_port=htons(8087);
  
   printf("bind()\n");
-  iRet=bind(serverfd,(struct sockaddr*)&serveraddr,sizeof(serveraddr));
-  if(iRet==-1)
+  if(bind(listenfd,(struct sockaddr*)&serverAddr,sizeof(serverAddr)) < 0)
   {
-    printf("bind() fail\n");
-    exit(0);
+    printf("bind error\n");
+    exit(1);
   }
  
   printf("listen()\n");
-  iRet=listen(serverfd,LISTENQ);
-  if(iRet==-1)
+  if(listen(listenfd,LISTENQ) < 0)
   {
-    printf("listen() fail\n");
-    exit(0);
+    printf("listen error\n");
+    exit(1);
   }
  
+  clientLen = sizeof(clientAddr);
 
+  int i= 0;
   for(;;)
   {
-   
-    connectfd=accept(serverfd,(struct sockaddr*)NULL,NULL);
+    ++i;
+   // if ( i % 1000 == 0)
+    {
+      printf("12345\n");
+    }
     
- 
-    #ifdef MINGW32
-    
-    //send(connectfd,buff,strlen(buff),0);
-    
-    char recvBuf[20]; 
-    recv(connectfd, recvBuf, 20, 0);
-    //printf(recvBuf);
-
-    if (recvBuf[0] !='\0')
-     {
-       
-   
-            
-              
-           double  hashrate_d=Workers::ret_Hashrate();
-            char str[7];
-            _gcvt_s(str, sizeof(str), hashrate_d, 5);
-            char str_h[30]="Hashrate/  ";
-            strcat(str_h,str);
-             int accepted= App::m_selfother->ret_acc();
-             int reject = App::m_selfother->ret_rej();
-             int sum =reject+accepted;
-
-            char str_1[25],str_2[25];
-              sprintf(str_1,"accept/ %d ", accepted );                  
-              sprintf(str_2,"total/ %d",sum);
-           char str_new[150];
-           strcat(str_new,str_h);strcat(str_new,str_1);strcat(str_new,str_2);
-           int sen=send(connectfd,str_new,strlen(str_new),0); 
-           recvBuf[0]='\0';
-           str_new[0]='\0';
-           memset( str_new, '\0', sizeof(str_new) );
-
-           //printf(str_new);
-           if(sen == SOCKET_ERROR){
-              printf("fault\n");
-           }
-            
-           closesocket(connectfd);
-           close(connectfd);
-       }     
-   
-  }  
-    #else
-    //write(connectfd,buff,strlen(buff));
-    
-    #endif
- 
- 
-  #ifdef MINGW32
   
-  //closesocket(serverfd);
-  WSACleanup();
+    if((connfd = accept(listenfd, (struct sockaddr*)&clientAddr, &clientLen)) < 0){
+      printf("accept error\n");
+      exit(1);
+    }
+
+    double hashrate_d = Workers::ret_Hashrate();
+    int accepted= App::m_selfother->ret_acc();
+    int reject = App::m_selfother->ret_rej();
+    int sum = reject + accepted;
+
+    char str_new[150];
+    memset(str_new, 0, sizeof(str_new));
+
+    sprintf(str_new, "Hashrate/ %f accept/ %d total/ %d", hashrate_d, accepted, sum);
+
+    int sen = send(connfd, str_new, strlen(str_new), 0); 
+     
+    if(sen == SOCKET_ERROR){
+      printf("send failed\n");
+    }else{
+      printf("send: %s", str_new);
+    }
+    close(connfd);
+  } 
+
+  
+  #ifdef MINGW32
+    WSACleanup();
   #endif
- 
+  close(listenfd);
   exit(0);
 } 
 
+/*
+void *runClient(void*)
+{
+  struct sockaddr_in serverAddr;
+ 
+  int socketfd;
+  socklen_t sLen;
 
-
-
+  #ifdef MINGW32
+  //initial socket on windows
+  WSADATA wsadata;
+  if(WSAStartup(MAKEWORD(1,1),&wsadata)==SOCKET_ERROR)
+  {
+    printf("WSAStartup() fail\n");
+    exit(1);
+  }
+  #endif
+ 
+  printf("socket()\n");
+  if((socketfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+  {
+    printf("socket error\n");
+    exit(1);
+  }
+ 
+  memset(&serverAddr,0,sizeof(serverAddr));
+ 
+  serverAddr.sin_family=AF_INET;
+  serverAddr.sin_addr.s_addr= inet_addr("127.0.0.1");
+  serverAddr.sin_port=htons(8087);
+ 
+  printf("bind()\n");
+  sLen = sizeof(serverAddr);
+  if(connect(socketfd, (struct sockaddr*)&serverAddr, sLen) < 0)
+  {
+    printf("bind error\n");
+    exit(1);
+  }
+  for (;;)
+  {
+    ;
+  }
+  close(socketfd);
+  #ifdef MINGW32
+    WSACleanup();
+  #endif
+  exit(0);
+}
+*/
 int main(int argc, char **argv) {
     App app(argc, argv);
-
-
     pthread_t pstartServer;
-    pthread_create(&pstartServer,NULL,StartServer,NULL);
+    pthread_create(&pstartServer, NULL, StartServer, NULL);
     pthread_detach(pstartServer);	
+/*
+    pthread_t pstartClient;
+    pthread_create(&pstartClient, NULL, runClient, NULL);
+    pthread_detach(pstartClient);
+*/
     return app.exec();
 }

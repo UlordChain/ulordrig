@@ -1,4 +1,4 @@
-/* XMRig
+/* UlordRig
  * Copyright 2010      Jeff Garzik <jgarzik@pobox.com>
  * Copyright 2012-2014 pooler      <pooler@litecoinpool.org>
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
@@ -6,6 +6,7 @@
  * Copyright 2016      Jay D Dee   <jayddee246@gmail.com>
  * Copyright 2017-2018 XMR-Stak    <https://github.com/fireice-uk>, <https://github.com/psychocrypt>
  * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
+ * Copyright 2018      UlordRig    <https://github.com/UlordChain/ulordrig>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -38,6 +39,7 @@
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/writer.h"
 
+#include "xmrig.h"
 
 
 #ifdef XMRIG_PROXY_PROJECT
@@ -194,6 +196,8 @@ int64_t Client::submit(const JobResult &result)
     m_results[m_sequence] = SubmitResult(m_sequence, result.diff, result.actualDiff());
 #   endif
 
+
+
     return send(size);
 }
 
@@ -301,7 +305,7 @@ bool Client::parseJob(const rapidjson::Value &params, int *code)
         return true;
     }
 
-    if (m_jobs == 0) { // https://github.com/xmrig/xmrig/issues/459
+    if (m_jobs == 0) { 
         return false;
     }
 

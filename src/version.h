@@ -1,4 +1,4 @@
-/* XMRig
+/* UlordRig
  * Copyright 2010      Jeff Garzik <jgarzik@pobox.com>
  * Copyright 2012-2014 pooler      <pooler@litecoinpool.org>
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
@@ -6,6 +6,7 @@
  * Copyright 2016      Jay D Dee   <jayddee246@gmail.com>
  * Copyright 2017-2018 XMR-Stak    <https://github.com/fireice-uk>, <https://github.com/psychocrypt>
  * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
+ * Copyright 2018      UlordRig    <https://github.com/UlordChain/ulordrig>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,18 +25,18 @@
 #ifndef __VERSION_H__
 #define __VERSION_H__
 
-#define APP_ID        "xmrig"
-#define APP_NAME      "XMRig"
-#define APP_DESC      "XMRig CPU miner"
-#define APP_VERSION   "2.5.2"
-#define APP_DOMAIN    "xmrig.com"
-#define APP_SITE      "www.xmrig.com"
-#define APP_COPYRIGHT "Copyright (C) 2016-2018 xmrig.com"
+#define APP_ID        "Ulordrig"
+#define APP_NAME      "Ulordrig"
+#define APP_DESC      "Ulord CPU miner"
+#define APP_VERSION   "0.1.1"
+#define APP_DOMAIN    "ulord.one"
+#define APP_SITE      "ulord.one"
+#define APP_COPYRIGHT "Copyright (C) 2018 ulord.one"
 #define APP_KIND      "cpu"
 
-#define APP_VER_MAJOR  2
-#define APP_VER_MINOR  5
-#define APP_VER_BUILD  2
+#define APP_VER_MAJOR  0
+#define APP_VER_MINOR  0
+#define APP_VER_BUILD  1
 #define APP_VER_REV    0
 
 #ifdef _MSC_VER

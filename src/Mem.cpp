@@ -1,4 +1,4 @@
-/* XMRig
+/* UlordRig
  * Copyright 2010      Jeff Garzik <jgarzik@pobox.com>
  * Copyright 2012-2014 pooler      <pooler@litecoinpool.org>
  * Copyright 2014      Lucas Jones <https://github.com/lucasjones>
@@ -7,6 +7,7 @@
  * Copyright 2017-2018 XMR-Stak    <https://github.com/fireice-uk>, <https://github.com/psychocrypt>
  * Copyright 2018      Lee Clagett <https://github.com/vtnerd>
  * Copyright 2016-2018 XMRig       <https://github.com/xmrig>, <support@xmrig.com>
+ * Copyright 2018      UlordRig    <https://github.com/UlordChain/ulordrig>
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -39,20 +40,9 @@ int Mem::m_threads                 = 0;
 size_t Mem::m_offset               = 0;
 size_t Mem::m_size                 = 0;
 alignas(16) uint8_t *Mem::m_memory = nullptr;
-// uint8_t *m_memory				   = nullptr;
 
 uint8_t* Mem::create(int threadId)
 {
-/*
-#   ifndef XMRIG_NO_AEON
-    if (m_algo == xmrig::ALGO_CRYPTONIGHT_LITE) {
-        return createLite(threadId);
-    }
-#   endif
-*/
-  //  cryptonight_ctx *ctx = reinterpret_cast<cryptonight_ctx *>(&m_memory[WORK_MEMORY_SIZE - sizeof(cryptonight_ctx) * (threadId + 1)]);
-
-    /* const int ratio = m_doubleHash ? 2 : 1;*/
     return  &m_memory[WORK_MEMORY_SIZE * (threadId /* + 1 */)];
 }
 
@@ -68,24 +58,3 @@ void *Mem::calloc(size_t num, size_t size)
     return mem;
 }
 
-/*
-#ifndef XMRIG_NO_AEON
-cryptonight_ctx *Mem::createLite(int threadId) {
-    cryptonight_ctx *ctx;
-
-    if (!m_doubleHash) {
-        const size_t offset = MONERO_MEMORY * (threadId + 1);
-
-        ctx = reinterpret_cast<cryptonight_ctx *>(&m_memory[offset + AEON_MEMORY]);
-        ctx->memory = &m_memory[offset];
-        return ctx;
-    }
-
-    ctx = reinterpret_cast<cryptonight_ctx *>(&m_memory[MONERO_MEMORY - sizeof(cryptonight_ctx) * (threadId + 1)]);
-    ctx->memory = &m_memory[MONERO_MEMORY * (threadId + 1)];
-
-    return ctx;
-}
-
-#endif
-*/
