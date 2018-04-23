@@ -30,7 +30,7 @@
 #include "crypto/cryptoHello.h"
 #include "Mem.h"
 #include "Options.h"
-#include "xmrig.h"
+#include "ulordrig.h"
 
 
 // bool Mem::m_doubleHash             = false;

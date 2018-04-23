@@ -31,7 +31,7 @@
 #include "Platform.h"
 #include "version.h"
 
-#ifdef XMRIG_NVIDIA_PROJECT
+#ifdef ULORDRIG_NVIDIA_PROJECT
 #   include "nvidia/cryptonight.h"
 #endif
 
@@ -68,7 +68,7 @@ static inline char *createUserAgent()
     length += snprintf(buf + length, max - length, ") libuv/%s", uv_version_string());
 #   endif
 
-#   ifdef XMRIG_NVIDIA_PROJECT
+#   ifdef ULORDRIG_NVIDIA_PROJECT
     const int cudaVersion = cuda_get_runtime_version();
     length += snprintf(buf + length, max - length, " CUDA/%d.%d", cudaVersion / 1000, cudaVersion % 100);
 #   endif

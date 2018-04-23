@@ -31,7 +31,7 @@
 
 void Cpu::init()
 {
-#   ifdef XMRIG_NO_LIBCPUID
+#   ifdef ULORDRIG_NO_LIBCPUID
     SYSTEM_INFO sysinfo;
     GetSystemInfo(&sysinfo);
 

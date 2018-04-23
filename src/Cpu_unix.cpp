@@ -47,7 +47,7 @@ typedef cpuset_t cpu_set_t;
 
 void Cpu::init()
 {
-#   ifdef XMRIG_NO_LIBCPUID
+#   ifdef ULORDRIG_NO_LIBCPUID
     m_totalThreads = sysconf(_SC_NPROCESSORS_CONF);
 #   endif
 

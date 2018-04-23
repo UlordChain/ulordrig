@@ -39,10 +39,9 @@
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/writer.h"
 
-#include "xmrig.h"
 
 
-#ifdef XMRIG_PROXY_PROJECT
+#ifdef ULORDRIG_PROXY_PROJECT
 #   include "proxy/JobResult.h"
 #else
 #   include "net/JobResult.h"
@@ -85,7 +84,7 @@ Client::Client(int id, const char *agent, IClientListener *listener) :
     m_recvBuf.base = m_buf;
     m_recvBuf.len  = sizeof(m_buf);
 
-#   ifndef XMRIG_PROXY_PROJECT
+#   ifndef ULORDRIG_PROXY_PROJECT
     m_keepAliveTimer.data = this;
     uv_timer_init(uv_default_loop(), &m_keepAliveTimer);
 #   endif
@@ -160,7 +159,7 @@ void Client::tick(uint64_t now)
 
 bool Client::disconnect()
 {
-#   ifndef XMRIG_PROXY_PROJECT
+#   ifndef ULORDRIG_PROXY_PROJECT
     uv_timer_stop(&m_keepAliveTimer);
 #   endif
 
@@ -173,7 +172,7 @@ bool Client::disconnect()
 
 int64_t Client::submit(const JobResult &result)
 {
-#   ifdef XMRIG_PROXY_PROJECT
+#   ifdef ULORDRIG_PROXY_PROJECT
     const char *nonce = result.nonce;
     const char *data  = result.result;
 #   else
@@ -190,7 +189,7 @@ int64_t Client::submit(const JobResult &result)
     const size_t size = snprintf(m_sendBuf, sizeof(m_sendBuf), "{\"id\":%" PRIu64 ",\"jsonrpc\":\"2.0\",\"method\":\"submit\",\"params\":{\"id\":\"%s\",\"job_id\":\"%s\",\"nonce\":\"%s\",\"result\":\"%s\"}}\n",
                                  m_sequence, m_rpcId.data(), result.jobId.data(), nonce, data);
 
-#   ifdef XMRIG_PROXY_PROJECT
+#   ifdef ULORDRIG_PROXY_PROJECT
     m_results[m_sequence] = SubmitResult(m_sequence, result.diff, result.actualDiff(), result.id);
 #   else
     m_results[m_sequence] = SubmitResult(m_sequence, result.diff, result.actualDiff());
@@ -268,7 +267,7 @@ bool Client::parseJob(const rapidjson::Value &params, int *code)
         return false;
     }
 
-#   ifdef XMRIG_PROXY_PROJECT
+#   ifdef ULORDRIG_PROXY_PROJECT
     Job job(m_id, m_url.variant());
     job.setClientId(m_rpcId);
     job.setCoin(m_url.coin());
@@ -325,7 +324,7 @@ bool Client::parseLogin(const rapidjson::Value &result, int *code)
         return false;
     }
 
-#   ifndef XMRIG_PROXY_PROJECT
+#   ifndef ULORDRIG_PROXY_PROJECT
     m_nicehash = m_url.isNicehash();
 #   endif
 
@@ -625,7 +624,7 @@ void Client::reconnect()
 
     setState(ConnectingState);
 
-#   ifndef XMRIG_PROXY_PROJECT
+#   ifndef ULORDRIG_PROXY_PROJECT
     if (m_url.isKeepAlive()) {
         uv_timer_stop(&m_keepAliveTimer);
     }
@@ -658,7 +657,7 @@ void Client::startTimeout()
 {
     m_expire = 0;
 
-#   ifndef XMRIG_PROXY_PROJECT
+#   ifndef ULORDRIG_PROXY_PROJECT
     if (!m_url.isKeepAlive()) {
         return;
     }

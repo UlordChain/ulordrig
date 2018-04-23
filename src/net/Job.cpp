@@ -59,10 +59,10 @@ static inline char hf_bin2hex(unsigned char c)
 Job::Job() :
     m_nicehash(false),
     m_coin(),
-    m_algo(xmrig::ALGO_CRYPTONIGHT),
+    m_algo(ulordrig::ALGO_CRYPTONIGHT),
     m_poolId(-2),
     m_threadId(-1),
-    m_variant(xmrig::VARIANT_AUTO),
+    m_variant(ulordrig::VARIANT_AUTO),
     m_size(0),
     m_diff(0),
     m_target(0),
@@ -161,16 +161,16 @@ void Job::setCoin(const char *coin)
     }
 
     strncpy(m_coin, coin, sizeof(m_coin));
-    m_algo = strcmp(m_coin, "AEON") == 0 ? xmrig::ALGO_CRYPTONIGHT_LITE : xmrig::ALGO_CRYPTONIGHT;
+    m_algo = strcmp(m_coin, "AEON") == 0 ? ulordrig::ALGO_CRYPTONIGHT_LITE : ulordrig::ALGO_CRYPTONIGHT;
 }
 
 
 void Job::setVariant(int variant)
 {
     switch (variant) {
-    case xmrig::VARIANT_AUTO:
-    case xmrig::VARIANT_NONE:
-    case xmrig::VARIANT_V1:
+    case ulordrig::VARIANT_AUTO:
+    case ulordrig::VARIANT_NONE:
+    case ulordrig::VARIANT_V1:
         m_variant = variant;
         break;
 

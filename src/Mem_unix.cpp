@@ -28,7 +28,7 @@
 #include <sys/mman.h>
 
 
-#if defined(XMRIG_ARM) && !defined(__clang__)
+#if defined(ULORDRIG_ARM) && !defined(__clang__)
 #   include "aligned_malloc.h"
 #else
 #   include <mm_malloc.h>
@@ -39,7 +39,7 @@
 #include "log/Log.h"
 #include "Mem.h"
 #include "Options.h"
-#include "xmrig.h"
+#include "ulordrig.h"
 
 
 bool Mem::allocate(int algo, int threads, /* bool doubleHash,*/ bool enabled)
@@ -48,7 +48,6 @@ bool Mem::allocate(int algo, int threads, /* bool doubleHash,*/ bool enabled)
     m_threads    = threads;
   //  m_doubleHash = doubleHash;
 
-    // const int ratio = (doubleHash && algo != xmrig::ALGO_CRYPTONIGHT_LITE) ? 2 : 1;
     m_size          = WORK_MEMORY_SIZE * (threads /*+ 1*/);
 
     if (!enabled) {

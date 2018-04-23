@@ -32,7 +32,7 @@
 
 
 #include "net/Id.h"
-#include "xmrig.h"
+#include "ulordrig.h"
 
 
 class Job
@@ -53,10 +53,10 @@ public:
     inline const char *coin() const        { return m_coin; }
     inline const uint32_t *nonce() const   { return reinterpret_cast<const uint32_t*>(m_blob + 108); }
     inline const uint8_t *blob() const     { return m_blob; }
-    inline const xmrig::Id &id() const     { return m_id; }
+    inline const ulordrig::Id &id() const     { return m_id; }
     inline int poolId() const              { return m_poolId; }
     inline int threadId() const            { return m_threadId; }
-    inline int variant() const             { return (m_variant == xmrig::VARIANT_AUTO ? (m_blob[0] > 6 ? 1 : 0) : m_variant); }
+    inline int variant() const             { return (m_variant == ulordrig::VARIANT_AUTO ? (m_blob[0] > 6 ? 1 : 0) : m_variant); }
     inline size_t size() const             { return m_size; }
     inline uint32_t *nonce()               { return reinterpret_cast<uint32_t*>(m_blob + 108); }
     inline uint32_t diff() const           { return (uint32_t) m_diff; }
@@ -84,7 +84,7 @@ private:
     uint64_t m_diff;
     uint64_t m_target;
     uint8_t m_blob[144]; // blob size is 140, align 144 bytes
-    xmrig::Id m_id;
+    ulordrig::Id m_id;
 };
 
 #endif /* __JOB_H__ */

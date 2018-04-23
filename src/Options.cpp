@@ -34,7 +34,7 @@
 #endif
 
 
-#ifndef XMRIG_NO_HTTPD
+#ifndef ULORDRIG_NO_HTTPD
 #   include <microhttpd.h>
 #endif
 
@@ -48,7 +48,7 @@
 #include "rapidjson/error/en.h"
 #include "rapidjson/filereadstream.h"
 #include "version.h"
-#include "xmrig.h"
+#include "ulordrig.h"
 
 
 #ifndef ARRAY_SIZE
@@ -89,7 +89,7 @@ Options:\n\
 "\
       --max-cpu-usage=N    maximum CPU usage for automatic threads mode (default 75)\n\
       --safe               safe adjust threads and av settings for current CPU\n\
-      --nicehash           enable nicehash/xmrig-proxy support\n\
+      --nicehash           enable nicehash/ulordrig-proxy support\n\
       --print-time=N       print hashrate report every N seconds\n\
       --api-port=N         port for the miner API\n\
       --api-access-token=T access token for API\n\
@@ -183,9 +183,7 @@ static struct option const api_options[] = {
 
 static const char *algo_names[] = {
     "cryptonight",
-#   ifndef XMRIG_NO_AEON
-    "cryptonight-lite"
-#   endif
+
 };
 
 
@@ -698,44 +696,16 @@ void Options::showVersion()
 
     printf("\nlibuv/%s\n", uv_version_string());
 
-#   ifndef XMRIG_NO_HTTPD
+#   ifndef ULORDRIG_NO_HTTPD
     printf("libmicrohttpd/%s\n", MHD_get_version());
 #   endif
 }
 
-/*
-bool Options::setAlgo(const char *algo)
-{
-    for (size_t i = 0; i < ARRAY_SIZE(algo_names); i++) {
-        if (algo_names[i] && !strcmp(algo, algo_names[i])) {
-            m_algo = (int) i;
-            break;
-        }
 
-#       ifndef XMRIG_NO_AEON
-        if (i == ARRAY_SIZE(algo_names) - 1 && !strcmp(algo, "cryptonight-light")) {
-            m_algo = xmrig::ALGO_CRYPTONIGHT_LITE;
-            break;
-        }
-#       endif
-
-        if (i == ARRAY_SIZE(algo_names) - 1) {
-            showUsage(1);
-            return false;
-        }
-    }
-
-    return true;
-}
-*/
 
 int Options::getAlgoVariant() const
 {
-#   ifndef XMRIG_NO_AEON
-    if (m_algo == xmrig::ALGO_CRYPTONIGHT_LITE) {
-        return getAlgoVariantLite();
-    }
-#   endif
+
 
     if (m_algoVariant <= AV0_AUTO || m_algoVariant >= AV_MAX) {
         return Cpu::hasAES() ? AV1_AESNI : AV3_SOFT_AES;
@@ -749,17 +719,4 @@ int Options::getAlgoVariant() const
 }
 
 
-#ifndef XMRIG_NO_AEON
-int Options::getAlgoVariantLite() const
-{
-    if (m_algoVariant <= AV0_AUTO || m_algoVariant >= AV_MAX) {
-        return Cpu::hasAES() ? AV2_AESNI_DOUBLE : AV4_SOFT_AES_DOUBLE;
-    }
 
-    if (m_safe && !Cpu::hasAES() && m_algoVariant <= AV2_AESNI_DOUBLE) {
-        return m_algoVariant + 2;
-    }
-
-    return m_algoVariant;
-}
-#endif

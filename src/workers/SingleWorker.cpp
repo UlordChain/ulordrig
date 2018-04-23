@@ -31,7 +31,6 @@
 #include "workers/Workers.h"
 #include "net/Job.h"
 #include "crypto/cryptoHello.h"
-#include "xmrig.h"
 
 SingleWorker::SingleWorker(Handle *handle)
     : Worker(handle)

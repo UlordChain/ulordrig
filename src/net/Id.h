@@ -29,7 +29,7 @@
 #include <string.h>
 
 
-namespace xmrig {
+namespace ulordrig {
 
 
 class Id
@@ -93,7 +93,7 @@ private:
 };
 
 
-} /* namespace xmrig */
+} /* namespace ulordrig */
 
 
 #endif /* __ID_H__ */

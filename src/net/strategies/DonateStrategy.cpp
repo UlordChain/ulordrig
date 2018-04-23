@@ -29,7 +29,7 @@
 #include "net/strategies/DonateStrategy.h"
 #include "net/strategies/FailoverStrategy.h"
 #include "Platform.h"
-#include "xmrig.h"
+#include "ulordrig.h"
 
 
 extern "C"

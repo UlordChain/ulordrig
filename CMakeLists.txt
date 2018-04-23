@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(xmrig)
+project(ulordrig)
 
 option(WITH_LIBCPUID "Use Libcpuid" ON)
 option(WITH_AEON     "CryptoNight-Lite support" OFF)
@@ -9,12 +9,6 @@ option(BUILD_STATIC  "Build static binary" OFF)
 include (CheckIncludeFile)
 include (cmake/cpu.cmake)
 
-# set(CMAKE_FIND_ROOT_PATH "c:/msys64/mingw64/bin")
-#set(CMAKE_C_COMPILER "c:/msys64/mingw64/bin/gcc.exe")
-#set(CMAKE_CXX_COMPILER "c:/msys64/mingw64/bin/g++.exe")
-
-set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -Wall -ggdb -fopenmp")
 
 set(HEADERS
     src/api/Api.h
@@ -54,7 +48,7 @@ set(HEADERS
     src/workers/SingleWorker.h
     src/workers/Worker.h
     src/workers/Workers.h
-    src/xmrig.h
+    src/ulordrig.h
    )
 
 
@@ -85,7 +79,7 @@ set(SOURCES
     src/workers/SingleWorker.cpp
     src/workers/Worker.cpp
     src/workers/Workers.cpp
-    src/xmrig.cpp
+    src/ulordrig.cpp
    )
 
 if (WIN32)
@@ -123,6 +117,7 @@ endif()
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
     EXECUTE_PROCESS(COMMAND uname -o COMMAND tr -d '\n' OUTPUT_VARIABLE OPERATING_SYSTEM)
+    MESSAGE(STATUS "OUTPUT_VARIABLE = ${OUTPUT_VARIABLE}.")
     if (OPERATING_SYSTEM MATCHES "Android")
         set(EXTRA_LIBS ${EXTRA_LIBS} log)
     endif()
@@ -145,9 +140,9 @@ if (WITH_LIBCPUID)
     set(CPUID_LIB cpuid)
     set(SOURCES_CPUID src/Cpu.cpp)
 else()
-    add_definitions(/DXMRIG_NO_LIBCPUID)
+    add_definitions(/DULORDRIG_NO_LIBCPUID)
 
-    if (XMRIG_ARM)
+    if (ULORDRIG_ARM)
         set(SOURCES_CPUID src/Cpu_arm.cpp)
     else()
         set(SOURCES_CPUID src/Cpu_stub.cpp)
@@ -160,9 +155,9 @@ if (HAVE_SYSLOG_H)
     set(SOURCES_SYSLOG src/log/SysLog.h src/log/SysLog.cpp)
 endif()
 
-if (NOT WITH_AEON)
-    add_definitions(/DXMRIG_NO_AEON)
-endif()
+#if (NOT WITH_AEON)
+#    add_definitions(/DULORDRIG_NO_AEON)
+#endif()
 
 if (WITH_HTTPD)
     find_package(MHD)
@@ -175,8 +170,8 @@ if (WITH_HTTPD)
     endif()
 else()
     set(MHD_LIBRARY "")
-    add_definitions(/DXMRIG_NO_HTTPD)
-    add_definitions(/DXMRIG_NO_API)
+    add_definitions(/DULORDRIG_NO_HTTPD)
+    add_definitions(/DULORDRIG_NO_API)
 endif()
 
 include_directories(src)
@@ -193,5 +188,5 @@ if (BUILD_STATIC)
     set(CMAKE_EXE_LINKER_FLAGS " -static")
 endif()
 
-add_executable(xmrig ${HEADERS} ${SOURCES} ${SOURCES_OS} ${SOURCES_CPUID} ${SOURCES_SYSLOG} ${HTTPD_SOURCES})
-target_link_libraries(xmrig ${UV_LIBRARIES} ${MHD_LIBRARY} ${EXTRA_LIBS} ${CPUID_LIB})
+add_executable(ulordrig ${HEADERS} ${SOURCES} ${SOURCES_OS} ${SOURCES_CPUID} ${SOURCES_SYSLOG} ${HTTPD_SOURCES})
+target_link_libraries(ulordrig ${UV_LIBRARIES} ${MHD_LIBRARY} ${EXTRA_LIBS} ${CPUID_LIB})

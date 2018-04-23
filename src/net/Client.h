@@ -130,9 +130,9 @@ private:
     uv_getaddrinfo_t m_resolver;
     uv_stream_t *m_stream;
     uv_tcp_t *m_socket;
-    xmrig::Id m_rpcId;
+    ulordrig::Id m_rpcId;
 
-#   ifndef XMRIG_PROXY_PROJECT
+#   ifndef ULORDRIG_PROXY_PROJECT
     uv_timer_t m_keepAliveTimer;
 #   endif
 };

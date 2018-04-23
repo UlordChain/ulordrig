@@ -29,7 +29,7 @@
 
 
 #include "net/Url.h"
-#include "xmrig.h"
+#include "ulordrig.h"
 
 
 #ifdef _MSC_VER
@@ -43,8 +43,8 @@ Url::Url() :
     m_host(nullptr),
     m_password(nullptr),
     m_user(nullptr),
-    m_algo(xmrig::ALGO_CRYPTONIGHT),
-    m_variant(xmrig::VARIANT_AUTO),
+    m_algo(ulordrig::ALGO_CRYPTONIGHT),
+    m_variant(ulordrig::VARIANT_AUTO),
     m_url(nullptr),
     m_port(kDefaultPort)
 {
@@ -68,8 +68,8 @@ Url::Url(const char *url) :
     m_host(nullptr),
     m_password(nullptr),
     m_user(nullptr),
-    m_algo(xmrig::ALGO_CRYPTONIGHT),
-    m_variant(xmrig::VARIANT_AUTO),
+    m_algo(ulordrig::ALGO_CRYPTONIGHT),
+    m_variant(ulordrig::VARIANT_AUTO),
     m_url(nullptr),
     m_port(kDefaultPort)
 {
@@ -82,7 +82,7 @@ Url::Url(const char *host, uint16_t port, const char *user, const char *password
     m_nicehash(nicehash),
     m_password(password ? strdup(password) : nullptr),
     m_user(user ? strdup(user) : nullptr),
-    m_algo(xmrig::ALGO_CRYPTONIGHT),
+    m_algo(ulordrig::ALGO_CRYPTONIGHT),
     m_variant(variant),
     m_url(nullptr),
     m_port(port)
@@ -214,9 +214,9 @@ void Url::setUser(const char *user)
 void Url::setVariant(int variant)
 {
    switch (variant) {
-   case xmrig::VARIANT_AUTO:
-   case xmrig::VARIANT_NONE:
-   case xmrig::VARIANT_V1:
+   case ulordrig::VARIANT_AUTO:
+   case ulordrig::VARIANT_NONE:
+   case ulordrig::VARIANT_V1:
        m_variant = variant;
        break;
 

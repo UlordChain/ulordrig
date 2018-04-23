@@ -22,12 +22,11 @@
  *   along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __XMRIG_H__
-#define __XMRIG_H__
+#ifndef __ulordrig_H__
+#define __ulordrig_H__
 
 
-
-namespace xmrig
+namespace ulordrig
 {
 
 
@@ -43,12 +42,7 @@ enum Variant {
     VARIANT_V1   = 1
 };
 
+} /* ulordrig */
 
 
-
-} /* xmrig */
-
-
-
-
-#endif /* __XMRIG_H__ */
+#endif /* __ulordrig_H__ */

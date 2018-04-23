@@ -46,7 +46,7 @@
 #   include "log/SysLog.h"
 #endif
 
-#ifndef XMRIG_NO_HTTPD
+#ifndef ULORDRIG_NO_HTTPD
 #   include "api/Httpd.h"
 #endif
 
@@ -109,7 +109,7 @@ App::~App()
 {
     uv_tty_reset_mode();
 
-#   ifndef XMRIG_NO_HTTPD
+#   ifndef ULORDRIG_NO_HTTPD
     delete m_httpd;
 #   endif
 
@@ -144,11 +144,11 @@ int App::exec()
         return 0;
     }
 
-#   ifndef XMRIG_NO_API
+#   ifndef ULORDRIG_NO_API
     Api::start();
 #   endif
 
-#   ifndef XMRIG_NO_HTTPD
+#   ifndef ULORDRIG_NO_HTTPD
     m_httpd = new Httpd(m_options->apiPort(), m_options->apiToken());
     m_httpd->start();
 #   endif

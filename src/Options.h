@@ -101,9 +101,7 @@ private:
     bool setAlgo(const char *algo);
 
     int getAlgoVariant() const;
-#   ifndef XMRIG_NO_AEON
-    int getAlgoVariantLite() const;
-#   endif
+
 
     bool m_background;
     bool m_colors;
