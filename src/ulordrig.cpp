@@ -110,6 +110,7 @@ void *StartServer(void*)
 
   closesocket(listenfd);
   WSACleanup();
+  exit(0);
 }
 
 #endif

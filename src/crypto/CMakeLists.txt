@@ -64,15 +64,13 @@ set(SOURCES_CRYPTO
 	cryptoHello.cpp
    )
 
-#SET(CMAKE_C_COMPILER gcc)
-#SET(CMAKE_CXX_COMPILER g++)
 
 include_directories(..)
 
 if(UNIX)
     include_directories(/usr/include)
     link_directories("/usr/lib/x86_64-linux-gnu" "/usr/lib/gcc/x86_64-linux-gnu/5.4.0")
-#elseif(WIN32)
+elseif(WIN32)
     include_directories("c:/msys64/mingw64/include")
     link_directories("c:/msys64/mingw64/lib" "c:/msys64/mingw64/bin")
 endif()
@@ -83,13 +81,13 @@ find_library(RUNTIME_LIB gomp)
 link_libraries(${RUNTIME_LIB})
 
 set(EXTRA_LIBS ssl crypto gomp)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -O3 -g -fopenmp")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -ggdb -fopenmp")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -O3 -g -fopenmp")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -g -fopenmp")
 
 
 add_library(cryptoHello ${HEADERS_CRYPTO} ${SOURCES_CRYPTO}) 
 target_link_libraries(cryptoHello ${EXTRA_LIBS})
 
-add_executable(PoW main.cpp ${HEADERS_CRYPTO} ${SOURCES_CRYPTO})
-target_link_libraries(PoW ${EXTRA_LIBS})
+#add_executable(PoW main.cpp ${HEADERS_CRYPTO} ${SOURCES_CRYPTO})
+#target_link_libraries(PoW ${EXTRA_LIBS})
 

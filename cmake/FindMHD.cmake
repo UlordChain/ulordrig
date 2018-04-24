@@ -8,7 +8,7 @@
 find_path(
     MHD_INCLUDE_DIR
     NAMES microhttpd.h
-    PATHS "${XMRIG_DEPS}" ENV "XMRIG_DEPS"
+    PATHS "${ULORDRIG_DEPS}" ENV "ULORDRIG_DEPS"
     PATH_SUFFIXES "include"
     DOC "microhttpd include dir"
     NO_DEFAULT_PATH
@@ -19,7 +19,7 @@ find_path(MHD_INCLUDE_DIR NAMES microhttpd.h)
 find_library(
     MHD_LIBRARY
     NAMES libmicrohttpd.a microhttpd libmicrohttpd
-    PATHS "${XMRIG_DEPS}" ENV "XMRIG_DEPS"
+    PATHS "${ULORDRIG_DEPS}" ENV "ULORDRIG_DEPS"
     PATH_SUFFIXES "lib"
     DOC "microhttpd library"
     NO_DEFAULT_PATH
