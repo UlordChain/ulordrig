@@ -60,34 +60,33 @@ set(SOURCES_CRYPTO
     c_sha512.c
     c_skein512_256.c
     c_whirlpool.c
- #   jtr_haval_helper.c
 	cryptoHello.cpp
    )
 
 
 include_directories(..)
 
+if(ULORDRIG_DEPS)
+	include_directories("${ULORDRIG_DEPS}")
+	link_directories("${ULORDRIG_DEPS}")
+endif()
+
 if(UNIX)
-    include_directories(/usr/include)
-    link_directories("/usr/lib/x86_64-linux-gnu" "/usr/lib/gcc/x86_64-linux-gnu/5.4.0")
+    #include_directories(/usr/include)
+	#link_directories("/usr/lib/x86_64-linux-gnu" "/usr/lib/gcc/x86_64-linux-gnu/5.4.0")
 elseif(WIN32)
     include_directories("c:/msys64/mingw64/include")
     link_directories("c:/msys64/mingw64/lib" "c:/msys64/mingw64/bin")
 endif()
 
-find_library(RUNTIME_LIB ssl)
+find_library(RUNTIME_LIB libssl.a)
 find_library(RUNTIME_LIB crypto)
-find_library(RUNTIME_LIB gomp)
 link_libraries(${RUNTIME_LIB})
 
-set(EXTRA_LIBS ssl crypto gomp)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -O3 -g -fopenmp")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -g -fopenmp")
-
+set(EXTRA_LIBS libssl.a crypto) 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -O3 -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -g")
 
 add_library(cryptoHello ${HEADERS_CRYPTO} ${SOURCES_CRYPTO}) 
 target_link_libraries(cryptoHello ${EXTRA_LIBS})
-
-#add_executable(PoW main.cpp ${HEADERS_CRYPTO} ${SOURCES_CRYPTO})
-#target_link_libraries(PoW ${EXTRA_LIBS})
 

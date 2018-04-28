@@ -16,7 +16,7 @@
     "threads": null,        // number of miner threads
     "pools": [
         {
-            "url": "testnet-pool.ulord.one", // URL of mining server
+            "url": "test-pool.ulord.one", // URL of mining server
             "user": "YOUR_WALLET",           // username for mining server
             "pass": "x",                     // password for mining server
             "keepalive": true,               // send keepalived for prevent timeout (need pool support)

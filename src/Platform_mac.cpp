@@ -33,7 +33,7 @@
 #include "version.h"
 
 #ifdef ULORDRIG_NVIDIA_PROJECT
-#   include "nvidia/cryptonight.h"
+#   include "nvidia/cryptohello.h"
 #endif
 
 

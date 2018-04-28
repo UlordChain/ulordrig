@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <omp.h>
+// #include <omp.h>
 
 #include "my_time.h"
 #include "common.h"
@@ -194,6 +194,7 @@ void calculateFinalResult(uint8_t *Maddr, uint8_t *c, const uint32_t D, uint8_t 
 /* 
  * Correctness & Performance test for Proof of work
 */
+/*
 void testPowFunction(uint8_t *mess, uint32_t messLen, const int64_t iterNum) {
 	int64_t j;
 
@@ -269,7 +270,7 @@ void testPowFunction(uint8_t *mess, uint32_t messLen, const int64_t iterNum) {
 		Maddr = NULL;
 	}
 }
-
+*/
 
 #define OUTPUT_BUFFER_SIZE	(32 * 1024UL * 1024UL)
 #define MAX_TEST_INPUT_LEN		140

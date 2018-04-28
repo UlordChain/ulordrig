@@ -24,9 +24,9 @@ int main(int argc, const char *argv[]) {
 	
 	// Test for oneWayFunction
 	initOneWayFunction();
-	testOneWayFunction(mess, 5000000);
+	//testOneWayFunction(mess, 5000000);
 	
-	testPowFunction(input, messLen, 5000);
+	// testPowFunction(input, messLen, 5000);
 	
 	// powNistTest("./powNistTest");
 	

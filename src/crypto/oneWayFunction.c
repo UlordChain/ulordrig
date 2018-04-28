@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include <omp.h>
+// #include <omp.h>
 
 #include "my_time.h"
 #include "common.h"
@@ -53,7 +53,7 @@ void initOneWayFunction() {
 	gost_init_table();
 	CRC32_Table_Init();
 }
-
+/*
 void testOneWayFunction(const char *mess, const int64_t iterNum) {
 	int64_t j;
 	uint32_t messLen = (uint32_t)strlen(mess);
@@ -121,3 +121,4 @@ void testOneWayFunction(const char *mess, const int64_t iterNum) {
 	
 	printf("***************************************************************************************************************************************\n");
 }
+*/

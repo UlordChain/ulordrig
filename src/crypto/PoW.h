@@ -30,7 +30,7 @@ extern "C" {
 	/* 
 	 * Correctness & Performance test for Proof of work
 	*/
-	void testPowFunction(uint8_t *mess, uint32_t messLen, const int64_t iterNum);
+	// void testPowFunction(uint8_t *mess, uint32_t messLen, const int64_t iterNum);
 	void powNistTest(const char *outFileName);
 	
 #ifdef __cplusplus
