@@ -12,6 +12,7 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
 * [Contacts](#contacts)
 
 
+
 ## Features
 * High performance.
 * Official Windows support.
@@ -23,6 +24,7 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
 * Smart automatic [CPU configuration](https://github.com/UlordChain/ulordrig).
 * Nicehash support
 * It's open source software.
+
 
 
 ## Install
@@ -37,6 +39,7 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
     cmake ..    
     make    
 ```
+
 
 
 ## Usage
@@ -77,10 +80,12 @@ As an example: `./ulordrig -o stratum+tcp://test-pool.ulord.one:7200 -u uTRHNH71
 Also you can use configuration via config file, default **config.json**. You can load multiple config files and combine it with command line options.
 
 
+
 ## Common Issues
 ### HUGE PAGES unavailable
 * Run ulordrig as Administrator.
 * Since version 0.8.0 ulordrig automatically enables SeLockMemoryPrivilege for current user, but reboot or sign out still required. [Manual instruction](https://msdn.microsoft.com/en-gb/library/ms190730.aspx).
+
 
 
 ## Other information
@@ -101,8 +106,10 @@ Please note performance is highly dependent on system load. The numbers above ar
 * Enable fast memory (Large/Huge pages).
 
 
+
 ## Release checksums
 ### SHA-256
+
 
 
 ## Contacts
