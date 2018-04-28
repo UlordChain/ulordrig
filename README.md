@@ -1,22 +1,16 @@
 # ulordrig
 
-
-
-
 ulordrig is a high performance Ulord CPU miner, with official support for Windows.
-
-
 
 #### Table of contents
 * [Features](#features)
-* [Download](#download)
+* [Install](#Install)
 * [Usage](#usage)
-* [Algorithm variations](#algorithm-variations)
-* [Build](https://github.com/ulordrig/ulordrig/wiki/Build)
 * [Common Issues](#common-issues)
 * [Other information](#other-information)
 * [Release checksums](#release-checksums)
 * [Contacts](#contacts)
+
 
 ## Features
 * High performance.
@@ -26,21 +20,29 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
 * Support for backup (failover) mining server.
 * keepalived support.
 * Command line options compatible with cpuminer.
-* Smart automatic [CPU configuration](https:https://github.com/UlordChain/ulordrig).
+* Smart automatic [CPU configuration](https://github.com/UlordChain/ulordrig).
 * Nicehash support
 * It's open source software.
 
-## Download
+
+## Install
 * Binary releases: https://github.com/UlordChain/ulordrig/releases
+    
 * Git tree: https://github.com/UlordChain/ulordrig.git
-  * Clone with `https://github.com/UlordChain/ulordrig.git` :hammer: [Build instructions](https://github.com/UlordChain/ulordrig/WIKI).
+```
+	sudo apt-get install git build-essential cmake libuv1-dev libmicrohttpd-dev    
+    git clone https://github.com/UlordChain/ulordrig.git   
+    cd ulordrig     
+    make build && cd build    
+    cmake ..    
+    make    
+```
+
 
 ## Usage
-Use [config.ulordrig.com](https://config.ulordrig.com/ulordrig) to generate, edit or share configurations.
-
+As an example: `./ulordrig -o stratum+tcp://test-pool.ulord.one:7200 -u uTRHNH71eiW2KMc2rSwmanpXGgDeKMZXdW.worker1 -p x -t 1`
 ### Options
-```
-  -a, --algo=ALGO          cryptonight (default) or cryptonight-lite
+```    
   -o, --url=URL            URL of mining server
   -O, --userpass=U:P       username:password pair for mining server
   -u, --user=USERNAME      username for mining server
@@ -74,29 +76,22 @@ Use [config.ulordrig.com](https://config.ulordrig.com/ulordrig) to generate, edi
 
 Also you can use configuration via config file, default **config.json**. You can load multiple config files and combine it with command line options.
 
-## Algorithm variations
-Since version 0.8.0.
-* `--av=1` For CPUs with hardware AES.
-* `--av=2` Lower power mode (double hash) of `1`.
-* `--av=3` Software AES implementation.
-* `--av=4` Lower power mode (double hash) of `3`.
 
 ## Common Issues
 ### HUGE PAGES unavailable
 * Run ulordrig as Administrator.
 * Since version 0.8.0 ulordrig automatically enables SeLockMemoryPrivilege for current user, but reboot or sign out still required. [Manual instruction](https://msdn.microsoft.com/en-gb/library/ms190730.aspx).
 
+
 ## Other information
 * No HTTP support, only stratum protocol support.
 * No TLS support.
-
-
 
 ### CPU mining performance
 * **Intel i7-7700** - 307 H/s (4 threads)
 * **AMD Ryzen 7 1700X** - 560 H/s (8 threads)
 
-Please note performance is highly dependent on system load. The numbers above are obtained on an idle system. Tasks heavily using a processor cache, such as video playback, can greatly degrade hashrate. Optimal number of threads depends on the size of the L3 cache of a processor, 1 thread requires 2 MB of cache.
+Please note performance is highly dependent on system load. The numbers above are obtained on an idle system. Tasks heavily using a processor cache, such as video playback, can greatly degrade hashrate. Optimal number of threads depends on the size of the L3 cache of a processor, 1 thread requires 1 MB of cache.
 
 ### Maximum performance checklist
 * Idle operating system.
@@ -106,15 +101,11 @@ Please note performance is highly dependent on system load. The numbers above ar
 * Enable fast memory (Large/Huge pages).
 
 
-
 ## Release checksums
 ### SHA-256
 ```
-b070d06a3615f3db67ad3beab43d6d21f3c88026aa2b4726a93df47145cd30ec ulordrig-0.0.1-xenial-amd64.tar.gz/ulordrig-0.0.1/ulordrig
-4852135d3f04fd450ba39abce51ca40ff9131d222220c8b30804be05f6679295 ulordrig-0.0.1-gcc-win32.zip/ulordrig.exe
-284309d07f08261af19c937ece6d2031910d9124a7359c207ded65890b2d7c5f ulordrig-0.0.1-gcc-win64.zip/ulordrig.exe
-e1dc46158a578fb030538fb06e5663a6acc5763545fb447a00ce0a6b388c5226 ulordrig-0.0.1-msvc-win64.zip/ulordrig.exe
 ```
+
 
 ## Contacts
 * support@ulordrig.org
