@@ -10,7 +10,7 @@ find_path(UV_INCLUDE_DIR NAMES uv.h)
 
 find_library(
     UV_LIBRARY
-    NAMES libuv.a uv libuv
+    NAMES libuv uv libuv.a
     PATHS "${ULORDRIG_DEPS}" ENV "ULORDRIG_DEPS"
     PATH_SUFFIXES "lib"
     NO_DEFAULT_PATH

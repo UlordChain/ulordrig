@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 project(ulordrig)
 
 option(WITH_LIBCPUID "Use Libcpuid" ON)
-option(WITH_AEON     "CryptoNight-Lite support" OFF)
 option(WITH_HTTPD    "HTTP REST API" ON)
 option(BUILD_STATIC  "Build static binary" OFF)
 
@@ -154,10 +153,6 @@ if (HAVE_SYSLOG_H)
     set(SOURCES_SYSLOG src/log/SysLog.h src/log/SysLog.cpp)
 endif()
 
-#if (NOT WITH_AEON)
-#    add_definitions(/DULORDRIG_NO_AEON)
-#endif()
-
 if (WITH_HTTPD)
     find_package(MHD)
 
@@ -178,7 +173,6 @@ include_directories(src/crypto)
 include_directories(src/3rdparty)
 include_directories(${UV_INCLUDE_DIR})
 
-# add library cryptoHello 
 include_directories ("${PROJECT_SOURCE_DIR}/src/crypto")
 add_subdirectory(src/crypto)
 set(EXTRA_LIBS ${EXTRA_LIBS} cryptoHello)

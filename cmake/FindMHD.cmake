@@ -18,7 +18,7 @@ find_path(MHD_INCLUDE_DIR NAMES microhttpd.h)
 
 find_library(
     MHD_LIBRARY
-    NAMES libmicrohttpd.a microhttpd libmicrohttpd
+    NAMES libmicrohttpd microhttpd libmicrohttpd.a 
     PATHS "${ULORDRIG_DEPS}" ENV "ULORDRIG_DEPS"
     PATH_SUFFIXES "lib"
     DOC "microhttpd library"
