@@ -100,12 +100,10 @@ static void print_threads()
         buf[0] = '\0';
     }
 
-    Log::i()->text(Options::i()->colors() ? "\x1B[01;32m * \x1B[01;37mTHREADS:      \x1B[01;36m%d\x1B[01;37m, %s, av=%d, %sdonate=%d%%%s" : " * THREADS:      %d, %s, av=%d, %sdonate=%d%%%s",
+    Log::i()->text(Options::i()->colors() ? "\x1B[01;32m * \x1B[01;37mTHREADS:      \x1B[01;36m%d\x1B[01;37m, %s %s%s" : " * THREADS:      %d, %s %s%s",
                    Options::i()->threads(),
                    Options::i()->algoName(),
-                   Options::i()->algoVariant(),
                    Options::i()->colors() && Options::i()->donateLevel() == 0 ? "\x1B[01;31m" : "",
-                   Options::i()->donateLevel(),
                    buf);
 }
 

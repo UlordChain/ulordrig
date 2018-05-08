@@ -38,7 +38,7 @@ extern "C"
 }
 
 
- const static char *kDonatePool   = "testnet_pool.ulord.one";
+ const static char *kDonatePool   = "test-pool.ulord.one";
 
 
 static inline int random(int min, int max){
@@ -58,9 +58,9 @@ DonateStrategy::DonateStrategy(int level, const char *user, int algo, IStrategyL
 	
 	crypto_sha3_256(const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(user)), static_cast<uint32_t>(strlen(user)), hash);
     Job::toHex(hash, 32, userId);
-    m_pools.push_back(new Url(kDonatePool, 7200, userId, nullptr, false, true));
+    //m_pools.push_back(new Url(kDonatePool, 7200, userId, nullptr, false, true));
 
-    m_strategy = new FailoverStrategy(m_pools, 1, 1, this, true);
+    // m_strategy = new FailoverStrategy(m_pools, 1, 1, this, true);
 
     m_timer.data = this;
     uv_timer_init(uv_default_loop(), &m_timer);
