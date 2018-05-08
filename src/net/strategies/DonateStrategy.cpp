@@ -38,7 +38,7 @@ extern "C"
 }
 
 
- const static char *kDonatePool   = "test-pool.ulord.one";
+ // const static char *kDonatePool   = "test-pool.ulord.one";
 
 
 static inline int random(int min, int max){

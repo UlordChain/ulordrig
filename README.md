@@ -18,11 +18,9 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
 * Official Windows support.
 * Small Windows executable, without dependencies.
 * x86/x64 support.
-* Support for backup (failover) mining server.
 * keepalived support.
 * Command line options compatible with cpuminer.
 * Smart automatic [CPU configuration](https://github.com/UlordChain/ulordrig).
-* Nicehash support
 * It's open source software.
 
 
@@ -32,10 +30,10 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
     
 * Git tree: https://github.com/UlordChain/ulordrig.git
 ```
-    sudo apt-get install git build-essential cmake libuv1-dev libmicrohttpd-dev    
+    sudo apt-get install git build-essential cmake libuv1-dev libmicrohttpd-dev openssl    
     git clone https://github.com/UlordChain/ulordrig.git   
     cd ulordrig     
-    make build && cd build    
+    mkdir build && cd build    
     cmake ..    
     make    
 ```
@@ -43,7 +41,7 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
 
 
 ## Usage
-As an example: `./ulordrig -o stratum+tcp://test-pool.ulord.one:7200 -u uTRHNH71eiW2KMc2rSwmanpXGgDeKMZXdW.worker1 -p x -t 1`
+As an example of testnet: `./ulordrig -o stratum+tcp://test-pool.ulord.one:7200 -u uTRHNH71eiW2KMc2rSwmanpXGgDeKMZXdW.worker1 -p x -t 1`
 ### Options
 ```    
   -o, --url=URL            URL of mining server
@@ -60,7 +58,6 @@ As an example: `./ulordrig -o stratum+tcp://test-pool.ulord.one:7200 -u uTRHNH71
       --no-huge-pages      disable huge pages support
       --no-color           disable colored output
       --variant            algorithm PoW variant
-      --donate-level=N     donate level, default 5% (5 minutes in 100 minutes)
       --user-agent         set custom user-agent string for pool
   -B, --background         run the miner in the background
   -c, --config=FILE        load a JSON-format configuration file
@@ -84,7 +81,7 @@ Also you can use configuration via config file, default **config.json**. You can
 ## Common Issues
 ### HUGE PAGES unavailable
 * Run ulordrig as Administrator.
-* Since version 0.8.0 ulordrig automatically enables SeLockMemoryPrivilege for current user, but reboot or sign out still required. [Manual instruction](https://msdn.microsoft.com/en-gb/library/ms190730.aspx).
+* Ulordrig automatically enables SeLockMemoryPrivilege for current user, but reboot or sign out still required. [Manual instruction](https://msdn.microsoft.com/en-gb/library/ms190730.aspx).
 
 
 
@@ -93,8 +90,6 @@ Also you can use configuration via config file, default **config.json**. You can
 * No TLS support.
 
 ### CPU mining performance
-* **Intel i7-7700** - 307 H/s (4 threads)
-* **AMD Ryzen 7 1700X** - 560 H/s (8 threads)
 
 Please note performance is highly dependent on system load. The numbers above are obtained on an idle system. Tasks heavily using a processor cache, such as video playback, can greatly degrade hashrate. Optimal number of threads depends on the size of the L3 cache of a processor, 1 thread requires 1 MB of cache.
 
