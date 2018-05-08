@@ -90,6 +90,7 @@ Also you can use configuration via config file, default **config.json**. You can
 * No TLS support.
 
 ### CPU mining performance
+* Intel(R) Xeon(R) CPU E3-1231 v3 - 860 H/s (8 threads)
 
 Please note performance is highly dependent on system load. The numbers above are obtained on an idle system. Tasks heavily using a processor cache, such as video playback, can greatly degrade hashrate. Optimal number of threads depends on the size of the L3 cache of a processor, 1 thread requires 1 MB of cache.
 
