@@ -31,7 +31,7 @@
 #define APP_VERSION   "1.0.0"
 #define APP_DOMAIN    "ulord.one"
 #define APP_SITE      "ulord.one"
-#define APP_COPYRIGHT "Copyright (C) 2018 ulord.one"
+#define APP_COPYRIGHT "Copyright 2018 ulord.one"
 #define APP_KIND      "cpu"
 
 #define APP_VER_MAJOR  1

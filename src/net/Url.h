@@ -52,7 +52,7 @@ public:
     inline uint16_t port() const             { return m_port; }
     inline void setKeepAlive(bool keepAlive) { m_keepAlive = keepAlive; }
     inline void setNicehash(bool nicehash)   { m_nicehash = nicehash; }
-    inline void setVariant(bool monero)      { m_variant = monero; }
+    inline void setVariant(bool var)      { m_variant = var; }
 
     bool parse(const char *url);
     bool setUserpass(const char *userpass);

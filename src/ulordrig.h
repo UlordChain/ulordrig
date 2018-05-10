@@ -31,8 +31,7 @@ namespace ulordrig
 
 
 enum Algo {
-    ALGO_CRYPTONIGHT,      /* CryptoNight (Monero) */
-    ALGO_CRYPTONIGHT_LITE, /* CryptoNight-Lite (AEON) */
+    ALGO_CRYPTOHELLO,      /* cryptohello (ulord) */
 };
 
 

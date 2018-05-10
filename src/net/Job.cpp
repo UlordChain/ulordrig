@@ -59,7 +59,7 @@ static inline char hf_bin2hex(unsigned char c)
 Job::Job() :
     m_nicehash(false),
     m_coin(),
-    m_algo(ulordrig::ALGO_CRYPTONIGHT),
+    m_algo(ulordrig::ALGO_CRYPTOHELLO),
     m_poolId(-2),
     m_threadId(-1),
     m_variant(ulordrig::VARIANT_AUTO),
@@ -161,7 +161,7 @@ void Job::setCoin(const char *coin)
     }
 
     strncpy(m_coin, coin, sizeof(m_coin));
-    m_algo = strcmp(m_coin, "AEON") == 0 ? ulordrig::ALGO_CRYPTONIGHT_LITE : ulordrig::ALGO_CRYPTONIGHT;
+    m_algo = ulordrig::ALGO_CRYPTOHELLO;
 }
 
 
