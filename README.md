@@ -29,14 +29,7 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
 * Binary releases: https://github.com/UlordChain/ulordrig/releases
     
 * Git tree: https://github.com/UlordChain/ulordrig.git
-```
-    sudo apt-get install git build-essential cmake libuv1-dev libmicrohttpd-dev openssl    
-    git clone https://github.com/UlordChain/ulordrig.git   
-    cd ulordrig     
-    mkdir build && cd build    
-    cmake ..    
-    make    
-```
+  * Clone with `git clone https://github.com/UlordChain/ulordrig.git` :hammer: [Build instructions](https://github.com/UlordChain/ulordrig/wiki/Build).
 
 
 
