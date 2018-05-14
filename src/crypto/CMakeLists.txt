@@ -71,21 +71,9 @@ if(ULORDRIG_DEPS)
 	link_directories("${ULORDRIG_DEPS}")
 endif()
 
-if(UNIX)
-    #include_directories(/usr/include)
-	#link_directories("/usr/lib/x86_64-linux-gnu" "/usr/lib/gcc/x86_64-linux-gnu/5.4.0")
-elseif(WIN32)
-    include_directories("c:/msys64/mingw64/include")
-    link_directories("c:/msys64/mingw64/lib" "c:/msys64/mingw64/bin")
-endif()
-
-find_library(RUNTIME_LIB crypto)
-link_libraries(${RUNTIME_LIB})
-
-set(EXTRA_LIBS crypto) 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -O3 -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -g")
 
 add_library(cryptoHello ${HEADERS_CRYPTO} ${SOURCES_CRYPTO}) 
-target_link_libraries(cryptoHello ${EXTRA_LIBS})
+target_link_libraries(cryptoHello crypto)
 
