@@ -67,7 +67,7 @@ As an example of testnet: `./ulordrig -o stratum+tcp://test-pool.ulord.one:7200 
   -V, --version            output version information and exit
 ```
 
-Also you can use configuration via config file, default **config.json**. You can load multiple config files and combine it with command line options.
+Also you can use configuration via config file, default **ulordrig/src/config.json**. You can load multiple config files and combine it with command line options.
 
 
 
