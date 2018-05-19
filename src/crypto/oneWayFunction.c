@@ -1,4 +1,6 @@
-﻿#include "oneWayFunction.h"
+﻿/* Copyright 2016-2018 The Ulord Core Foundation */
+
+#include "oneWayFunction.h"
 
 #include <stdio.h>
 #include <stdint.h>

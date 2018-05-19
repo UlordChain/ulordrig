@@ -1,3 +1,5 @@
+/* Copyright 2016-2018 The Ulord Core Foundation */
+
 #ifndef __CRYPTOHELLO_H__
 #define __CRYPTOHELLO_H__
 

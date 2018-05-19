@@ -9,11 +9,6 @@
 #include "common.h"
 #include "jtr_crc32.h"
 
-/*
- * 功能：单向函数 crc32
- * 输入：1. input ：输入消息
- *		 2. output：输出结果
-*/
 void crypto_crc32(uint8_t *input, uint32_t inputLen, uint8_t *output) {
 	/** 
 	 *	$hash[0:31] = sha256($input)

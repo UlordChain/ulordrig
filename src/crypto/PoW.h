@@ -1,4 +1,6 @@
-﻿#ifndef POW_H
+﻿/* Copyright 2016-2018 The Ulord Core Foundation */
+
+#ifndef POW_H
 #define POW_H
 
 #include <stdint.h>

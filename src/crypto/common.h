@@ -1,4 +1,6 @@
-﻿#ifndef COMMON_H
+﻿/* Copyright 2016-2018 The Ulord Core Foundation */
+
+#ifndef COMMON_H
 #define COMMON_H
 
 #include <stdint.h>

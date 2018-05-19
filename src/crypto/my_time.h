@@ -1,3 +1,5 @@
+/* Copyright 2016-2018 The Ulord Core Foundation */
+
 #ifndef MY_TIME_H
 #define MY_TIME_H
 

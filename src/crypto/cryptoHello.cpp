@@ -1,3 +1,5 @@
+/* Copyright 2016-2018 The Ulord Core Foundation */
+
 #include <stdio.h>
 #include <stdlib.h>
 

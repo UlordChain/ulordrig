@@ -1,4 +1,6 @@
-﻿#ifndef MY_RAND48_R_H
+﻿/* Copyright 2016-2018 The Ulord Core Foundation */
+
+#ifndef MY_RAND48_R_H
 #define MY_RAND48_R_H
 
 #include <stdlib.h>
