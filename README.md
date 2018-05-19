@@ -1,6 +1,6 @@
 # ulordrig
 
-ulordrig is a high performance Ulord CPU miner, with official support for Windows.
+ulordrig is a high performance Ulord CPU miner, forked from [xmrig](https://github.com/xmrig/xmrig), with official support for Windows.
 
 #### Table of contents
 * [Features](#features)
@@ -29,14 +29,7 @@ ulordrig is a high performance Ulord CPU miner, with official support for Window
 * Binary releases: https://github.com/UlordChain/ulordrig/releases
     
 * Git tree: https://github.com/UlordChain/ulordrig.git
-```
-    sudo apt-get install git build-essential cmake libuv1-dev libmicrohttpd-dev openssl    
-    git clone https://github.com/UlordChain/ulordrig.git   
-    cd ulordrig     
-    mkdir build && cd build    
-    cmake ..    
-    make    
-```
+  * Clone with `git clone https://github.com/UlordChain/ulordrig.git` :hammer: [Build instructions](https://github.com/UlordChain/ulordrig/wiki/Build).
 
 
 
@@ -74,7 +67,7 @@ As an example of testnet: `./ulordrig -o stratum+tcp://test-pool.ulord.one:7200 
   -V, --version            output version information and exit
 ```
 
-Also you can use configuration via config file, default **config.json**. You can load multiple config files and combine it with command line options.
+Also you can use configuration via config file, default **ulordrig/src/config.json**. You can load multiple config files and combine it with command line options.
 
 
 
