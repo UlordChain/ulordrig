@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "cryptoHello.h"
 #include "PoW.h"
 #include "oneWayFunction.h"
-#include "cryptoHello.h"
 
 bool cryptoHello::init(){
 

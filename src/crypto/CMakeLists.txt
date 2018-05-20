@@ -75,5 +75,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -O3 -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -g")
 
 add_library(cryptoHello ${HEADERS_CRYPTO} ${SOURCES_CRYPTO}) 
-target_link_libraries(cryptoHello crypto)
+target_link_libraries(cryptoHello /usr/lib/x86_64-linux-gnu/libcrypto.a -ldl)
 
+#dd_executable(cry main.cpp ${HEADERS_CRYPTO} ${SOURCES_CRYPTO}) 
+#arget_link_libraries(cry /usr/lib/x86_64-linux-gnu/libcrypto.a -ldl)
