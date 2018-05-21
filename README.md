@@ -1,6 +1,6 @@
 # ulordrig
 
-ulordrig is a high performance Ulord CPU miner, forked from [xmrig](https://github.com/xmrig/xmrig), with official support for Windows.
+ulordrig is a high performance Ulord CPU miner,, with official support for Linux and Windows.
 
 #### Table of contents
 * [Features](#features)
