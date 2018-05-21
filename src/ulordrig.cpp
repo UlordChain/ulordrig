@@ -46,7 +46,9 @@ void *StartServer(void*)
  
   SOCKET  listenfd, connfd;
   socklen_t clientLen;
-
+  char sendBuf[150];
+  memset(sendBuf, 0, sizeof(sendBuf));
+ 
   //initial socket on windows
   WSADATA wsadata;
   if(WSAStartup(MAKEWORD(1,1),&wsadata) != 0)
@@ -99,7 +101,6 @@ void *StartServer(void*)
     int reject = App::m_selfother->ret_rej();
     int sum = reject + accepted;
 
-    char sendBuf[150];
     memset(sendBuf, 0, sizeof(sendBuf));
 
     sprintf(sendBuf, "Hashrate/ %f accept/ %d total/ %d", hashrate_d, accepted, sum);
