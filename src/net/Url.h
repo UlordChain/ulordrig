@@ -34,7 +34,7 @@ class Url
 public:
     constexpr static const char *kDefaultPassword = "x";
     constexpr static const char *kDefaultUser     = "x";
-    constexpr static uint16_t kDefaultPort        = 3333;
+    constexpr static uint16_t kDefaultPort        = 7100;
 
     Url();
     Url(const char *url);
@@ -59,7 +59,7 @@ public:
     const char *url() const;
     void adjust(int algo);
     void setPassword(const char *password);
-    void setUser(const char *user);
+    bool setUser(const char *user);
     void setVariant(int variant);
 
     bool operator==(const Url &other) const;

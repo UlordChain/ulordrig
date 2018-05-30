@@ -63,8 +63,7 @@ static char const usage[] = "\
 Usage: " APP_ID " [OPTIONS]\n\
 Options:\n\
   -o, --url=URL            URL of mining server\n\
-  -O, --userpass=U:P       username:password pair for mining server\n\
-  -u, --user=USERNAME      username for mining server\n\
+  -u, --user=USERNAME      username(walletaddress + workername) for mining server\n\
   -p, --pass=PASSWORD      password for mining server\n\
   -t, --threads=N          number of miner threads\n\
   -v, --av=N               algorithm variation, 0 auto select\n\
@@ -315,14 +314,6 @@ bool Options::parseArg(int key, const char *arg)
 {
     switch (key) {
         
-    case 'a': 
-    /*
-        if (!setAlgo(arg)) {
-            return false;
-        }
-    */
-        break;
-    
     case 'o': /* --url */
         if (m_pools.size() > 1 || m_pools[0]->isValid()) {
             Url *url = new Url(arg);
@@ -341,16 +332,19 @@ bool Options::parseArg(int key, const char *arg)
             return false;
         }
         break;
-
-    case 'O': /* --userpass */
+    /***
+    case 'O': // --userpass 
         if (!m_pools.back()->setUserpass(arg)) {
             return false;
         }
         break;
-
+    ***/
     case 'u': /* --user */
-        m_pools.back()->setUser(arg);
+        if (!m_pools.back()->setUser(arg)){
+            return false;
+        }
         break;
+    //case 'w': 
 
     case 'p': /* --pass */
         m_pools.back()->setPassword(arg);

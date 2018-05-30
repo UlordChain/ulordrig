@@ -138,7 +138,7 @@ bool Url::parse(const char *url)
     return true;
 }
 
-
+/*
 bool Url::setUserpass(const char *userpass)
 {
     const char *p = strchr(userpass, ':');
@@ -155,7 +155,7 @@ bool Url::setUserpass(const char *userpass)
 
     return true;
 }
-
+*/
 
 const char *Url::url() const
 {
@@ -200,16 +200,45 @@ void Url::setPassword(const char *password)
 }
 
 
-void Url::setUser(const char *user)
+bool Url::setUser(const char *user)
 {
     if (!user) {
-        return;
+        return false;
+    }
+    if (!(*user == 'U' || *user == 'u')){
+        printf("Invalid user!\n");
+        return false;
     }
 
+    const char *p = strchr(user, '.');
+
+    if (!p) {
+        if(strlen(user) != 34){
+            printf("Invalid user!\n");
+            return false;
+        }
+    } else if (p - user != 34){
+        printf("Invalid user!\n");
+        return false;
+    } else if (*(p + 1) != '\0') {
+        char *worker = strdup(p + 1);
+        bool isValidName = true;
+        for (uint32_t i = 0; i < strlen(worker); ++i){
+            if (!((worker[i] >= '0' && worker[i] <= '9' ) || (worker[i] >= 'a' && worker[i] <= 'z') || (worker[i] >= 'A' && worker[i] <= 'Z'))){
+                isValidName = false;
+                break;
+            }
+        }
+        free(worker);
+        if (!isValidName){
+            printf("Incorrect workername, which is made up of numbers and letters!\n");
+            return false;
+        }
+    }
     free(m_user);
     m_user = strdup(user);
+    return true;
 }
-
 
 void Url::setVariant(int variant)
 {
