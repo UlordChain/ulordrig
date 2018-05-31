@@ -221,7 +221,7 @@ Options::Options(int argc, char **argv) :
     m_maxCpuUsage(75),
     m_printTime(60),
     m_priority(-1),
-    m_retries(5),
+    m_retries(1),
     m_retryPause(5),
     m_threads(0),
     m_affinity(-1L)
@@ -255,10 +255,10 @@ Options::Options(int argc, char **argv) :
         return;
     }
 
-    m_algoVariant = getAlgoVariant();
-    if (m_algoVariant == AV2_AESNI_DOUBLE || m_algoVariant == AV4_SOFT_AES_DOUBLE) {
-        m_doubleHash = true;
-    }
+    // m_algoVariant = getAlgoVariant();
+    // if (m_algoVariant == AV2_AESNI_DOUBLE || m_algoVariant == AV4_SOFT_AES_DOUBLE) {
+    //     m_doubleHash = true;
+    // }
 
     if (!m_threads) {
         m_threads = Cpu::optimalThreadsCount(m_algo, m_doubleHash, m_maxCpuUsage);
@@ -316,6 +316,7 @@ bool Options::parseArg(int key, const char *arg)
         
     case 'o': /* --url */
         if (m_pools.size() > 1 || m_pools[0]->isValid()) {
+
             Url *url = new Url(arg);
             if (url->isValid()) {
                 m_pools.push_back(url);
@@ -328,26 +329,26 @@ bool Options::parseArg(int key, const char *arg)
             m_pools[0]->parse(arg);
         }
 
-        if (!m_pools.back()->isValid()) {
-            return false;
+        for (uint32_t i = 0; i < m_pools.size(); ++i){
+            if(!m_pools[i]->isValid()){
+                return false;
+            }
         }
-        break;
-    /***
-    case 'O': // --userpass 
-        if (!m_pools.back()->setUserpass(arg)) {
-            return false;
-        }
-        break;
-    ***/
+     break;
+
     case 'u': /* --user */
-        if (!m_pools.back()->setUser(arg)){
-            return false;
+        for (uint32_t i = 0; i < m_pools.size(); ++i){
+            if(!m_pools[i]->setUser(arg)){
+                return false;
+            }
         }
         break;
     //case 'w': 
 
     case 'p': /* --pass */
-        m_pools.back()->setPassword(arg);
+        for (uint32_t i = 0; i < m_pools.size(); ++i){
+            m_pools[i]->setPassword(arg);
+        }
         break;
 
     case 'l': /* --log-file */

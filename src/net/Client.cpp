@@ -349,7 +349,6 @@ int Client::resolve(const char *host)
     if (m_failures == -1) {
         m_failures = 0;
     }
-
     const int r = uv_getaddrinfo(uv_default_loop(), &m_resolver, Client::onResolved, host, nullptr, &m_hints);
     if (r) {
         if (!m_quiet) {
@@ -770,6 +769,7 @@ void Client::onRead(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 
 void Client::onResolved(uv_getaddrinfo_t *req, int status, struct addrinfo *res)
 {
+
     auto client = getClient(req->data);
     if (!client) {
         return;

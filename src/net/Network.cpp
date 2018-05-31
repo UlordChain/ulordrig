@@ -135,19 +135,22 @@ void Network::onPause(IStrategy *strategy)
     }
 
     if (!m_strategy->isActive()) {
-        LOG_ERR("no active pools, stop mining");
+        LOG_ERR("The current pool connection is interrupted, loading...");
         m_state.stop();
         return Workers::pause();
     }
 }
+
 int Network::ret_accpeted(){
- //m_state.add(result, error);
+
  return  m_state.accepted;
 }
+
 int Network::ret_rejected(){
- //m_state.add(result, error);
+
  return  m_state.rejected;
 }
+
 void Network::onResultAccepted(IStrategy *strategy, Client *client, const SubmitResult &result, const char *error)
 {
     m_state.add(result, error);

@@ -205,6 +205,7 @@ bool Url::setUser(const char *user)
     if (!user) {
         return false;
     }
+
     if (!(*user == 'U' || *user == 'u')){
         printf("Invalid user!\n");
         return false;
@@ -212,15 +213,7 @@ bool Url::setUser(const char *user)
 
     const char *p = strchr(user, '.');
 
-    if (!p) {
-        if(strlen(user) != 34){
-            printf("Invalid user!\n");
-            return false;
-        }
-    } else if (p - user != 34){
-        printf("Invalid user!\n");
-        return false;
-    } else if (*(p + 1) != '\0') {
+    if (*(p + 1) != '\0') {
         char *worker = strdup(p + 1);
         bool isValidName = true;
         for (uint32_t i = 0; i < strlen(worker); ++i){
@@ -231,10 +224,11 @@ bool Url::setUser(const char *user)
         }
         free(worker);
         if (!isValidName){
-            printf("Incorrect workername, which is made up of numbers and letters!\n");
+            printf("Incorrect workername, which is only made up of numbers and letters!\n");
             return false;
         }
     }
+
     free(m_user);
     m_user = strdup(user);
     return true;
