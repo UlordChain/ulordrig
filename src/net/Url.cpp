@@ -213,7 +213,7 @@ bool Url::setUser(const char *user)
 
     const char *p = strchr(user, '.');
 
-    if (*(p + 1) != '\0') {
+    if (p && *(p + 1) != '\0') {
         char *worker = strdup(p + 1);
         bool isValidName = true;
         for (uint32_t i = 0; i < strlen(worker); ++i){
