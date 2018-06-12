@@ -1,5 +1,11 @@
+if (WITH_SYSTEM_PROCESSOR)
+	set(CMAKE_SYSTEM_PROCESSOR ${WITH_SYSTEM_PROCESSOR})
+endif()
+
 if (NOT CMAKE_SYSTEM_PROCESSOR)
     message(WARNING "CMAKE_SYSTEM_PROCESSOR not defined")
+else()
+	message(STATUS "cmake system processor: ${CMAKE_SYSTEM_PROCESSOR}")
 endif()
 
 

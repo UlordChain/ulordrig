@@ -66,13 +66,25 @@ set(SOURCES_CRYPTO
 
 include_directories(..)
 
-if(ULORDRIG_DEPS)
-	include_directories("${ULORDRIG_DEPS}")
-	link_directories("${ULORDRIG_DEPS}")
+if(OPENSSL_DIRECTORY)
+	include_directories("${OPENSSL_DIRECTORY}/include")
+	set(CRYPTO_LIBRARY "${OPENSSL_DIRECTORY}/lib/libcrypto.a")
+else()
+	set(CRYPTO_LIBRARY crypto)
+endif()
+
+message(STATUS "find CRYPTO: ${CRYPTO_LIBRARY}")
+
+set(EXTRA_LIBRARY "")
+if(UNIX)
+	if(CRYPTO_LIBRARY STREQUAL libcrypto.a)
+		set(EXTRA_LIBRARY dl)
+		#link_libraries(dl)
+	endif()
 endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -O3 -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -g")
 
 add_library(cryptoHello ${HEADERS_CRYPTO} ${SOURCES_CRYPTO}) 
-target_link_libraries(cryptoHello crypto)
+target_link_libraries(cryptoHello ${CRYPTO_LIBRARY} ${EXTRA_LIBRARY})
