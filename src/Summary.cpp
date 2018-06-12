@@ -157,11 +157,9 @@ void Summary::print()
     print_cpu();
     print_threads();
     print_pools();
-
 #   ifndef ULORDRIG_NO_API
     print_api();
 #   endif
-
     print_commands();
 }
 

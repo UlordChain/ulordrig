@@ -144,7 +144,6 @@ void ConsoleLog::print(va_list args)
     if (m_uvBuf.len <= 0) {
         return;
     }
-
     if (!isWritable()) {
         fputs(m_buf, stdout);
         fflush(stdout);

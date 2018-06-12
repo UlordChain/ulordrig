@@ -24,7 +24,7 @@
 
 #include "App.h"
 
-#ifdef WIN32
+#ifdef WIN32_HASHRATE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
 {
     App app(argc, argv);
 
-    #ifdef WIN32
+    #ifdef WIN32_HASHRATE
     pthread_t pstartServer;
     pthread_create(&pstartServer, NULL, StartServer, NULL);
     pthread_detach(pstartServer);	

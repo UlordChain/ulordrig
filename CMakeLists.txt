@@ -5,9 +5,15 @@ option(WITH_LIBCPUID "Use Libcpuid" ON)
 option(WITH_HTTPD    "HTTP REST API" OFF)
 option(BUILD_STATIC  "Build static binary" OFF)
 
+option(WITH_HASHRATE "for UI" OFF)
+
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    message(STATUS "debug enable")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -ggdb")
+endif()
+
 include (CheckIncludeFile)
 include (cmake/cpu.cmake)
-
 
 set(HEADERS
     src/api/Api.h
@@ -92,6 +98,11 @@ if (WIN32)
 
     add_definitions(/DWIN32)
     set(EXTRA_LIBS ws2_32 psapi iphlpapi userenv)
+    
+    if (WITH_HASHRATE)
+        message("WITH_HASHRATE")
+        add_definitions(/DWIN32_HASHRATE)
+    endif()
 elseif (APPLE)
     set(SOURCES_OS
         src/App_unix.cpp
@@ -157,9 +168,12 @@ if (WITH_HTTPD)
     find_package(MHD)
 
     if (MHD_FOUND)
+        message("with httpd!")
         include_directories(${MHD_INCLUDE_DIRS})
         set(HTTPD_SOURCES src/api/Httpd.h src/api/Httpd.cpp)
-		set(EXTRA_LIBS ${EXTRA_LIBS} -lgnutls -lgcrypt)
+        if (UNIX)
+            set(EXTRA_LIBS ${EXTRA_LIBS} -lgnutls -lgcrypt)
+        endif()
     else()
         message(FATAL_ERROR "microhttpd NOT found: use `-DWITH_HTTPD=OFF` to build without http deamon support")
     endif()

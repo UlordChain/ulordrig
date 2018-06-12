@@ -67,7 +67,6 @@ Network::Network(const Options *options) :
 
     m_timer.data = this;
     uv_timer_init(uv_default_loop(), &m_timer);
-
     uv_timer_start(&m_timer, Network::onTick, kTickInterval, kTickInterval);
 }
 
@@ -185,7 +184,6 @@ void Network::setJob(Client *client, const Job &job, bool donate)
 void Network::tick()
 {
     const uint64_t now = uv_now(uv_default_loop());
-
     m_strategy->tick(now);
 
     if (m_donate) {

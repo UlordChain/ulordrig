@@ -56,7 +56,6 @@ void Log::text(const char* fmt, ...)
     va_list args;
     va_list copy;
     va_start(args, fmt);
-
     for (ILogBackend *backend : m_backends) {
         va_copy(copy, args);
         backend->text(fmt, copy);

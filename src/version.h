@@ -28,14 +28,14 @@
 #define APP_ID        "Ulordrig"
 #define APP_NAME      "Ulordrig"
 #define APP_DESC      "Ulord CPU miner"
-#define APP_VERSION   "1.0.0"
+#define APP_VERSION   "1.1.0"
 #define APP_DOMAIN    "ulord.one"
 #define APP_SITE      "ulord.one"
-#define APP_COPYRIGHT "Copyright 2018 ulord.one"
+#define APP_COPYRIGHT "Copyright 2018 Ulord Foundation Ltd."
 #define APP_KIND      "cpu"
 
 #define APP_VER_MAJOR  1
-#define APP_VER_MINOR  0
+#define APP_VER_MINOR  1
 #define APP_VER_BUILD  0
 #define APP_VER_REV    0
 

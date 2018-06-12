@@ -100,6 +100,7 @@ void FailoverStrategy::tick(uint64_t now)
 
 void FailoverStrategy::onClose(Client *client, int failures)
 {
+
     if (failures == -1) {
         return;
     }
@@ -109,12 +110,20 @@ void FailoverStrategy::onClose(Client *client, int failures)
         m_listener->onPause(this);
     }
 
-    if (m_index == 0 && failures < m_retries) {
+    if (/*m_index == 0 && */failures < m_retries + 1) {
         return;
+    } else {
+        client->setDormancy(true);
+        client->disconnect();
     }
 
     if (m_index == client->id() && (m_pools.size() - m_index) > 1) {
-        m_pools[++m_index]->connect();
+        m_pools[++m_index]->setDormancy(false);
+        m_pools[m_index]->connect();
+    }else if (m_index == client->id() && m_pools.size() - m_index == 1){
+        m_index = 0;
+        m_pools[m_index]->setDormancy(false);
+        m_pools[m_index]->connect();
     }
 }
 
@@ -137,6 +146,7 @@ void FailoverStrategy::onLoginSuccess(Client *client)
 
     for (size_t i = 1; i < m_pools.size(); ++i) {
         if (active != static_cast<int>(i)) {
+            m_pools[i]->setDormancy(true);
             m_pools[i]->disconnect();
         }
     }

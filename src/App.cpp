@@ -136,7 +136,6 @@ int App::exec()
 
     Mem::allocate(m_options->algo(), m_options->threads(), m_options->hugePages());
     Summary::print();
-
     if (m_options->dryRun()) {
         LOG_NOTICE("OK");
         release();

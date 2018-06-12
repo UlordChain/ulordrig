@@ -53,7 +53,7 @@ public:
     inline const char *coin() const        { return m_coin; }
     inline const uint32_t *nonce() const   { return reinterpret_cast<const uint32_t*>(m_blob + 108); }
     inline const uint8_t *blob() const     { return m_blob; }
-    inline const ulordrig::Id &id() const     { return m_id; }
+    inline const ulordrig::Id &id() const  { return m_id; }
     inline int poolId() const              { return m_poolId; }
     inline int threadId() const            { return m_threadId; }
     inline int variant() const             { return (m_variant == ulordrig::VARIANT_AUTO ? (m_blob[0] > 6 ? 1 : 0) : m_variant); }
