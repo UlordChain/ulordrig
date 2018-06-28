@@ -100,6 +100,12 @@ Please note performance is highly dependent on system load. The numbers above ar
 ### SHA-256
 
 
+Donations
+---------
+To support development of this project feel free to donate :)
+* UT: UW9axn8wtuwbkr2SRmo4vUraTc7tRycQF3
+
+
 
 ## Contacts
 * support@ulordrig.org
