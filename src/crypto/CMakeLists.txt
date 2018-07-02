@@ -83,8 +83,10 @@ if(UNIX)
 	endif()
 endif()
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -O3 -g")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -g")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Ofast -msse4.1")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Ofast -msse4.1")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -msse4.1")
+add_definitions(/DSSE_VERSION)
 
 add_library(cryptoHello ${HEADERS_CRYPTO} ${SOURCES_CRYPTO}) 
 target_link_libraries(cryptoHello ${CRYPTO_LIBRARY} ${EXTRA_LIBRARY})
