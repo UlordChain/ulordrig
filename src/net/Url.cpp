@@ -223,9 +223,10 @@ bool Url::setUser(const char *user)
             }
         }
         if (!isValidName){
-            printf("Incorrect workername: %s, which is only made up of numbers, letters and underscore!\n", worker);
+            printf("Incorrect workername: %s (which is only made up of numbers, letters and underscore!)\n", worker);
             free(worker);
-            return false;
+			exit(1);
+            //return false;
         }
         free(worker);
     }
