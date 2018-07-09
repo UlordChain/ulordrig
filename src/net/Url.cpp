@@ -217,16 +217,17 @@ bool Url::setUser(const char *user)
         char *worker = strdup(p + 1);
         bool isValidName = true;
         for (uint32_t i = 0; i < strlen(worker); ++i){
-            if (!((worker[i] >= '0' && worker[i] <= '9' ) || (worker[i] >= 'a' && worker[i] <= 'z') || (worker[i] >= 'A' && worker[i] <= 'Z'))){
+            if (!((worker[i] >= '0' && worker[i] <= '9' ) || (worker[i] >= 'a' && worker[i] <= 'z') || (worker[i] >= 'A' && worker[i] <= 'Z') || worker[i] == '_')){
                 isValidName = false;
                 break;
             }
         }
-        free(worker);
         if (!isValidName){
-            printf("Incorrect workername, which is only made up of numbers and letters!\n");
+            printf("Incorrect workername: %s, which is only made up of numbers, letters and underscore!\n", worker);
+            free(worker);
             return false;
         }
+        free(worker);
     }
 
     free(m_user);
