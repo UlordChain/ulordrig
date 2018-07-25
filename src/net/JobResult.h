@@ -74,7 +74,7 @@ public:
     int poolId;
     uint32_t diff;
     uint32_t nonce;
-    alignas(128) uint8_t result[32];
+    uint8_t result[32];
     ulordrig::Id jobId;
 };
 
